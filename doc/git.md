@@ -49,9 +49,45 @@ unset GNOME_KEYRING_CONTROL
 ```
 
 ### To update and synchronize with github
+Suppose you have a github repository "test", and cloned to office computer as "test". 
 
+Now you added some files and updated some files. To check what are tracked:
+```
+git status
+```
+To add all files under current directory and subdirectories for tracking
+```
+git add .
+```
+To remove files/folders from tracking, there are two ways:
+ * list the file or folder name in file ".gitignore" 
+ * use ```git rm --cached filename``` to remove the file from tracking
 
+Commit the changes:
+```
+git commit -a -m "remark of this commit"
+```
 
+Push the changes to github:
+```
+git push
+```
+
+Now you are back home and want to continue to work on home computer.
+
+If not cloned yet, clone the project:
+```
+git clone https://github.com/newbooks/test.git
+``` 
+Otherwise, go to the project directory,
+1 git pull
+2 then edit code
+3 git commit
+4 git push 
+
+Do 3 and 4 as often as you like.
+
+Repeat 1 to 4 any time you switch a computer to continue to write code. This way, all computers are synchronized with github repository. 
  
 ## Revisions - rewind the code history
 

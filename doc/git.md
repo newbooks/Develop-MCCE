@@ -144,11 +144,23 @@ Push tag to remote server
 
     git push origin [tagname] 
 
-## Solving conflict
-
-
 
 ## Collaboration in a project - Issue, Fork, Branch, Pull and Merge 
+When writing a program together, we usually work on different parts, or different aspects or the same program. One goal is to protect the master repository while allowing maximum flexibility for developers to experiment their implementation. So instead of editing the code in master repository, we work in forked repositories.
+
+```
+Upstream (master copy) -> fork -> issue -> branch -> coding -> pull request -> approval 
+         |                                  |__________|                           |
+         |________________________close issue, delete branch_______________________| 
+                                            
+```                    
+
+Branch commands:
+
+    git branch                          (show branches)
+    git checkout -b <branch name>       (create and switch to the branch)
+    git branch <branch name>            (switch branch)
+    git branch -d <branch name>         (delete a branch)
 
 configure upstream
 syncing a fork

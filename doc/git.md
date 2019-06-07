@@ -157,11 +157,16 @@ Upstream (master copy) -> fork -> issue -> branch -> coding -> pull request -> a
 
 Branch commands:
 
-    git branch                          (show branches)
-    git checkout -b <branch name>       (create and switch to the branch)
-    git branch <branch name>            (switch branch)
-    git branch -d <branch name>         (delete a branch)
-
+    git branch                              (show branches)
+    git branch -r                           (show remote branches)
+    git checkout -b <branch name>           (create and switch to the branch)
+    git checkout <branch name>              (switch to the branch)
+    git branch <branch name>                (create branch)
+    git branch -d <branch name>             (delete a branch)
+    git push origin --delete <branch name>  (delete a remote branch)
+    git fetch --prune                       (updates remote-tracking branches)
+    
+    
 configure upstream
 syncing a fork
 

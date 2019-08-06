@@ -1,0 +1,16 @@
+Main program:
+    pymcce
+
+Four steps:
+    premcce.py: convert to mcce pdb
+    mkconf.py: make conformers
+    mkenergy.py: caculate energy table
+    monte.py: Monte Carlo sampling of states
+
+Supporting modules:
+    pymccelib.py: mcce modules
+    geometry.py: geometry operations
+
+Analysis tools:
+    fitpka.py: Titration curve fitting
+    mfe.py: use mean field to analyze free energy

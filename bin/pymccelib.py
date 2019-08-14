@@ -148,3 +148,4 @@ class Env:
         return
 
 
+env = Env()

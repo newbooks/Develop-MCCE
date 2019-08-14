@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 
 import logging
+import os
 
 Delta_PW_warning = 0.1
 ROOMT = 298.15
 PH2KCAL = 1.364
 KCAL2KT = 1.688
 KJ2KCAL = 0.239
+
+logging.basicConfig(level=logging.DEBUG, %(levelname)10s: %(message)s')
 
 class Env:
     def __init__(self):
@@ -18,15 +21,18 @@ class Env:
         self.fn_conflist3 = "head3.lst"
         self.energy_dir = "energies"
         self.prm = self.load_runprm()
+        if "TPL_FOLDER" not in self.prm or self.prm["TPL_FOLDER"] == "DEFAULT":
+            path = str(os.path.dirname(os.path.abspath(__file__)))
+            tpl_path = 'param'.join(path.rsplit('bin', 1))
+            self.prm["TPL_FOLDER"] = tpl_path
+            logging.info("   Changing TPL_FOLDER to %s" % tpl_path)
+
         self.tpl = {}
+
         return
 
     def load_runprm(self):
-        # default is string unless specified as below
-        float_values = ["EPSILON_PROT", "TITR_PH0", "TITR_PHD", "TITR_EH0", "TITR_EHD", "CLASH_DISTANCE",
-                        "BIG_PAIRWISE", "MONTE_T", "MONTE_REDUCE"]
-        int_values = ["TITR_STEPS", "MONTE_RUNS", "MONTE_TRACE", "MONTE_NITER", "MONTE_NEQ",
-                      "MONTE_NSTART", "MONTE_FLIPS", "NSTATE_MAX", "MONTE_NEQ"]
+        # All values are stripped string
         prm = {}
         logging.info("   Loading %s" % self.runprm)
         lines = open(self.runprm).readlines()
@@ -40,18 +46,13 @@ class Env:
                 key = line[left_p + 1:right_p]
                 fields = line[:left_p].split()
                 if len(fields) >= 1:
-                    value = fields[0]
-                    if key in float_values:
-                        prm[key] = float(value)
-                    elif key in int_values:
-                        prm[key] = int(value)
-                    else:
-                        prm[key] = value
+                    prm[key] = fields[0]
+
         return prm
 
     def print_runprm(self):
         for key in self.prm.keys():
-            print("%-25s:%s" % (key, str(self.prm[key])))
+            print("%-25s:%s" % (key, self.prm[key]))
         return
 
     def load_ftpl(self, file):
@@ -80,48 +81,10 @@ class Env:
                 self.tpl[keys] = int(value_string)
             else:
                 self.tpl[keys] = value_string
-
         return
 
-
-    def load_tpl(self, file):
-        """Load a tpl file."""
-        print("   Loading tpl file %s" % file)
-        float_values = ["EXTRA", "SCALING"]
-        int_values = []
-
-        lines = open(file).readlines()
-        for line in lines:
-            line = line.split("#")[0]
-            if len(line) < 21:
-                continue
-            keys = [line[:9], line[9:14], line[15:19]]
-            value_string = line[20:].strip()
-
-            keys = [x for x in keys if x]
-            keys = tuple(keys)
-
-            if keys[0] in float_values:
-                self.tpl[keys] = float(value_string)
-            elif keys[0] in int_values:
-                self.tpl[keys] = int(value_string)
-            else:
-                self.tpl[keys] = value_string
-
-        return
-
-
-    def read_extra(self):
-        """Read extra.tpl."""
-        fname = self.prm["EXTRA"]
-
-        print("   Extra tpl parameters in file %s" % fname)
-        if os.path.isfile(fname):
-            if fname[-5:] == ".ftpl":
-                self.load_ftpl(fname)
-            elif fname[-4:] == ".tpl ":
-                self.load_tpl(fname)
-
+    def set_default_values(self):
+        logging.info("   Set non-zero default values for missing parameters")
         default_values_keys = [("SCALING", "VDW0"),
                                ("SCALING", "VDW1"),
                                ("SCALING", "VDW"),
@@ -132,7 +95,6 @@ class Env:
             if element not in self.tpl:
                 print("      Set to default: %s = 1.0" % ",".join(element))
                 self.tpl[element] = 1.0
-
         return
 
     def print_scaling(self):

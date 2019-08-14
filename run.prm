@@ -21,6 +21,7 @@ f        step 4: monte carlo sampling                       (DO_MONTE)
 ==============================================================================
 Less modified entries
 ------------------------------------------------------------------------------
+DEFAULT  tpl file folder path, "DEFAULT" to launch location (TPL_FOLDER)
 ./extra.ftpl                                                (EXTRA)
 
 ph       "ph" for pH titration, "eh" for eh titration       (TITR_TYPE)

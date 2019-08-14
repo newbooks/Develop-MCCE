@@ -14,14 +14,15 @@ Steps:
 f        step 1: pdb -> mcce pdb                            (DO_PREMCCE)
 f        step 2: make conformers                            (DO_ROTAMERS)
 f        step 3: energy table                               (DO_ENERGY)
-t        step 4: monte carlo sampling                       (DO_MONTE)
+f        step 4: monte carlo sampling                       (DO_MONTE)
 ==============================================================================
 
 
 ==============================================================================
 Less modified entries
 ------------------------------------------------------------------------------
-./extra.ftpl                          (EXTRA)
+DEFAULT  tpl file folder path, "DEFAULT" to launch location (TPL_FOLDER)
+./extra.ftpl                                                (EXTRA)
 
 ph       "ph" for pH titration, "eh" for eh titration       (TITR_TYPE)
 0.0      Initial pH                                         (TITR_PH0)

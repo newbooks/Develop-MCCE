@@ -25,3 +25,4 @@ def welcome():
 if __name__ == "__main__":
     welcome()
     env.print_runprm()
+    env.print_scaling()

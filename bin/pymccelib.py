@@ -2,14 +2,14 @@
 
 import logging
 import os
+import glob
 
-Delta_PW_warning = 0.1
 ROOMT = 298.15
 PH2KCAL = 1.364
 KCAL2KT = 1.688
 KJ2KCAL = 0.239
 
-logging.basicConfig(level=logging.DEBUG, %(levelname)10s: %(message)s')
+logging.basicConfig(level=logging.DEBUG, format='%(levelname)-10s: %(message)s')
 
 class Env:
     def __init__(self):
@@ -20,15 +20,16 @@ class Env:
         self.fn_conflist2 = "head2.lst"
         self.fn_conflist3 = "head3.lst"
         self.energy_dir = "energies"
+
+        # load run.prm
         self.prm = self.load_runprm()
-        if "TPL_FOLDER" not in self.prm or self.prm["TPL_FOLDER"] == "DEFAULT":
-            path = str(os.path.dirname(os.path.abspath(__file__)))
-            tpl_path = 'param'.join(path.rsplit('bin', 1))
-            self.prm["TPL_FOLDER"] = tpl_path
-            logging.info("   Changing TPL_FOLDER to %s" % tpl_path)
+        self.prm_default()
 
+        # load ftpl files
         self.tpl = {}
-
+        self.ftpldir = self.prm["TPL_FOLDER"]
+        self.load_ftpldir()
+        self.tpl_default()
         return
 
     def load_runprm(self):
@@ -57,8 +58,6 @@ class Env:
 
     def load_ftpl(self, file):
         """Load a tpl file."""
-        float_values = ["EXTRA", "SCALING"]
-        int_values = []
 
         logging.info("   Loading ftpl file %s" % file)
         lines = open(file).readlines()
@@ -75,15 +74,28 @@ class Env:
             keys = tuple(keys)
 
             value_string = fields[1].strip()
-            if keys[0] in float_values:
-                self.tpl[keys] = float(value_string)
-            elif keys[0] in int_values:
-                self.tpl[keys] = int(value_string)
+            if keys in self.tpl:
+                self.tpl[keys] = self.tpl[keys] + " , " + value_string
             else:
                 self.tpl[keys] = value_string
         return
 
-    def set_default_values(self):
+
+    def prm_default(self):
+        if "TPL_FOLDER" not in self.prm or self.prm["TPL_FOLDER"] == "DEFAULT":
+            path = str(os.path.dirname(os.path.abspath(__file__)))
+            tpl_path = 'param'.join(path.rsplit('bin', 1))
+            self.prm["TPL_FOLDER"] = tpl_path
+            logging.info("   Changing TPL_FOLDER to %s" % tpl_path)
+
+        if "PW_WARNING" not in self.prm:
+            self.prm["PW_WARNING"] = "0.05"
+            logging.info("   Setting PW_WARNING to default value 0.05")
+
+        return
+
+
+    def tpl_default(self):
         logging.info("   Set non-zero default values for missing parameters")
         default_values_keys = [("SCALING", "VDW0"),
                                ("SCALING", "VDW1"),
@@ -93,7 +105,7 @@ class Env:
                                ("SCALING", "DSOLV")]
         for element in default_values_keys:
             if element not in self.tpl:
-                print("      Set to default: %s = 1.0" % ",".join(element))
+                logging.info("      Set to default: %s = 1.0" % ",".join(element))
                 self.tpl[element] = 1.0
         return
 
@@ -109,5 +121,14 @@ class Env:
         print("      DSOLV = %.3f" % self.tpl[("SCALING", "DSOLV")])
         return
 
+    def load_ftpldir(self):
+        cwd = os.getcwd()
+        os.chdir(self.ftpldir)
+        files = glob.glob("*.ftpl")
+        for fname in files:
+            self.load_ftpl(fname)
+
+        os.chdir(cwd)
+        return
 
 env = Env()

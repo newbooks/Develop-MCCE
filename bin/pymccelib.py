@@ -9,8 +9,8 @@ PH2KCAL = 1.364
 KCAL2KT = 1.688
 KJ2KCAL = 0.239
 
-logging.basicConfig(level=logging.DEBUG, format='%(levelname)-10s: %(message)s')
-
+logging.basicConfig(level=logging.DEBUG, format='%(name)s: %(levelname)s: %(message)s')
+logger_env = logging.getLogger("init")
 class Env:
     def __init__(self):
         # Hard coded values
@@ -35,7 +35,7 @@ class Env:
     def load_runprm(self):
         # All values are stripped string
         prm = {}
-        logging.info("   Loading %s" % self.runprm)
+        logger_env.info("   Loading %s" % self.runprm)
         lines = open(self.runprm).readlines()
         # Sample line: "t        step 1: pre-run, pdb-> mcce pdb                    (DO_PREMCCE)"
         for line in lines:
@@ -59,7 +59,7 @@ class Env:
     def load_ftpl(self, file):
         """Load a tpl file."""
 
-        logging.info("   Loading ftpl file %s" % file)
+        logger_env.info("   Loading ftpl file %s" % file)
         lines = open(file).readlines()
         for line in lines:
             line = line.split("#")[0]
@@ -75,7 +75,12 @@ class Env:
 
             value_string = fields[1].strip()
             if keys in self.tpl:
-                self.tpl[keys] = self.tpl[keys] + " , " + value_string
+                if value_string == "!!!":
+                # Special rule to negate a key, it is used by the last loaded ftpl file
+                # to overwrite values that might have been defined before.
+                    del self.tpl[keys]
+                else:
+                    self.tpl[keys] = self.tpl[keys] + " , " + value_string
             else:
                 self.tpl[keys] = value_string
         return
@@ -86,17 +91,17 @@ class Env:
             path = str(os.path.dirname(os.path.abspath(__file__)))
             tpl_path = 'param'.join(path.rsplit('bin', 1))
             self.prm["TPL_FOLDER"] = tpl_path
-            logging.info("   Changing TPL_FOLDER to %s" % tpl_path)
+            logger_env.info("   Changing TPL_FOLDER to %s" % tpl_path)
 
         if "PW_WARNING" not in self.prm:
             self.prm["PW_WARNING"] = "0.05"
-            logging.info("   Setting PW_WARNING to default value 0.05")
+            logger_env.info("   Setting PW_WARNING to default value 0.05")
 
         return
 
 
     def tpl_default(self):
-        logging.info("   Set non-zero default values for missing parameters")
+        logger_env.info("   Set non-zero default values for missing parameters")
         default_values_keys = [("SCALING", "VDW0"),
                                ("SCALING", "VDW1"),
                                ("SCALING", "VDW"),
@@ -105,7 +110,7 @@ class Env:
                                ("SCALING", "DSOLV")]
         for element in default_values_keys:
             if element not in self.tpl:
-                logging.info("      Set to default: %s = 1.0" % ",".join(element))
+                logger_env.info("   Set to default: %s = 1.0" % ",".join(element))
                 self.tpl[element] = 1.0
         return
 

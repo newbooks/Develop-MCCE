@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+import logging
+logging.basicConfig(level=logging.DEBUG, format='%(name)s: %(levelname)s: %(message)s')
+
 from pymccelib import *
 
 
@@ -24,5 +27,6 @@ def welcome():
 
 if __name__ == "__main__":
     welcome()
+    env.init()
     env.print_runprm()
     env.print_scaling()

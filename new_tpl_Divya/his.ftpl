@@ -153,9 +153,9 @@ RADIUS,  HIS+1,  " CD2": 1.700,   2.000,   0.150
 RADIUS,  HIS+1,  " HD2": 1.000,   1.000,   0.020
 
 # Conformer parameters that appear in head3.lst: ne, Em0, nH, pKa0, rxn
-CONFORMER, HIS01: Em0=   0.0, pKa0=  0.00, ne= 0, nH= 0, rxn= -4.000
-CONFORMER, HIS02: Em0=   0.0, pKa0=  0.00, ne= 0, nH= 0, rxn= -4.000
-CONFORMER, HIS+1: Em0=   0.0, pKa0=  6.98, ne= 0, nH= 1, rxn=-16.100
+CONFORMER, HIS01: Em0=   0.0, pKa0=  0.00, ne= 0, nH= 0, rxn02= -7.58, rxn04= -4.000, rxn08= -1.77
+CONFORMER, HIS02: Em0=   0.0, pKa0=  0.00, ne= 0, nH= 0, rxn02= -7.84, rxn04= -4.000, rxn08= -2.65
+CONFORMER, HIS+1: Em0=   0.0, pKa0=  6.98, ne= 0, nH= 1, rxn02= -33.76, rxn04= -16.100, rxn08= -7.72
 
 # Rotatable bonds. The atoms extended in the bond direction will all be rotated.
 ROTATE, HIS: " CB " - " CG "

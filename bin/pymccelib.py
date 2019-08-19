@@ -201,6 +201,9 @@ class Protein:
             icode = line[26]
             xyz = line[30:54]
 
+            if resname == "PRO" and atomname == " H  ":   # Proline H atom exception
+                continue
+
             current_resid = (resname, chainid, seqnum, icode)
             # mcce line, need to add conf_number, radius, charge, conf_type, conf_history
             if current_resid != previous_resid:

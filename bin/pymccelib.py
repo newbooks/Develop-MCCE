@@ -9,9 +9,6 @@ PH2KCAL = 1.364
 KCAL2KT = 1.688
 KJ2KCAL = 0.239
 
-logger_env = logging.getLogger("init")
-
-
 class Env:
     def __init__(self):
         # Hard coded values
@@ -28,6 +25,8 @@ class Env:
         return
 
     def init(self):
+        logging.info("Step 0. Initialize MCCE run environment.")
+
         # load run.prm
         self.prm = self.load_runprm()
         self.prm_default()
@@ -35,13 +34,21 @@ class Env:
         # load ftpl files
         self.ftpldir = self.prm["TPL_FOLDER"]
         self.load_ftpldir()
+
+        # load extra.ftpl
+        if "EXTRA" in self.prm and os.path.isfile(self.prm["EXTRA"]):
+            self.load_ftpl(self.prm["EXTRA"])
+
+        # set default
         self.tpl_default()
+        logging.info("Step 0. Done.\n")
         return
 
     def load_runprm(self):
         # All values are stripped string
         prm = {}
-        logger_env.info("   Loading %s" % self.runprm)
+        path = os.path.abspath(self.runprm)
+        logging.info("   Loading run parameter from %s" % path)
         lines = open(self.runprm).readlines()
         # Sample line: "t        step 1: pre-run, pdb-> mcce pdb                    (DO_PREMCCE)"
         for line in lines:
@@ -65,7 +72,6 @@ class Env:
     def load_ftpl(self, file):
         """Load a tpl file."""
 
-        logger_env.info("   Loading ftpl file %s" % file)
         lines = open(file).readlines()
         for line in lines:
             line = line.split("#")[0]
@@ -108,17 +114,13 @@ class Env:
             path = str(os.path.dirname(os.path.abspath(__file__)))
             tpl_path = 'param'.join(path.rsplit('bin', 1))
             self.prm["TPL_FOLDER"] = tpl_path
-            logger_env.info("   Changing TPL_FOLDER to %s" % tpl_path)
-
-        if "PW_WARNING" not in self.prm:
-            self.prm["PW_WARNING"] = "0.05"
-            logger_env.info("   Setting PW_WARNING to default value 0.05")
+            logging.info("   Default TPL_FOLDER is set to %s" % tpl_path)
 
         return
 
 
     def tpl_default(self):
-        logger_env.info("   Set non-zero default values for missing parameters")
+        logging.info("   Set missing non-zero default values:")
         default_values_keys = [("SCALING", "VDW0"),
                                ("SCALING", "VDW1"),
                                ("SCALING", "VDW"),
@@ -127,7 +129,7 @@ class Env:
                                ("SCALING", "DSOLV")]
         for element in default_values_keys:
             if element not in self.tpl:
-                logger_env.info("   Set to default: %s = 1.0" % ",".join(element))
+                logging.info("      Set to default: %s = 1.0" % ",".join(element))
                 self.tpl[element] = 1.0
         return
 
@@ -147,6 +149,7 @@ class Env:
         cwd = os.getcwd()
         os.chdir(self.ftpldir)
         files = glob.glob("*.ftpl")
+        logging.info("   Loading ftpl files from %s" % self.ftpldir)
         for fname in files:
             self.load_ftpl(fname)
 
@@ -246,9 +249,6 @@ class Protein:
             icount += 1
 
         return mccelines
-
-
-
 
 
 env = Env()

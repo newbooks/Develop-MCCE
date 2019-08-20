@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import logging
-logging.basicConfig(level=logging.DEBUG, format='%(name)s: %(levelname)s: %(message)s')
 
 from pymccelib import *
 
@@ -22,11 +21,12 @@ def welcome():
     print("Last Updates:                                              ")
     print("   09/01/2019: Use free format tpl.                        ")
     print("===========================================================")
+    print()
     return
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.DEBUG, format='%(message)s')
     welcome()
     env.init()
-    env.print_runprm()
-    env.print_scaling()
+

@@ -16,9 +16,9 @@ CONFLIST, GLY: GLYBK
 # Atom definition
 CONNECT, " N  ", GLYBK: sp2, " ?  ", " CA ", " H  "
 CONNECT, " H  ", GLYBK: s, " N  "
-CONNECT, " CA ", GLYBK: sp3, " N  ", " C  ", "1HA ", "2HA "
-CONNECT, "1HA ", GLYBK: s, " CA "
-CONNECT, "2HA ", GLYBK: s, " CA "
+CONNECT, " CA ", GLYBK: sp3, " N  ", " C  ", " HA2", " HA3"
+CONNECT, " HA2", GLYBK: s, " CA "
+CONNECT, " HA3", GLYBK: s, " CA "
 CONNECT, " O  ", GLYBK: sp2, " C  "
 CONNECT, " C  ", GLYBK: sp2, " CA ", " O  ", " ?  "
 
@@ -26,8 +26,8 @@ CONNECT, " C  ", GLYBK: sp2, " CA ", " O  ", " ?  "
 CHARGE, GLYBK, " N  ": -0.350
 CHARGE, GLYBK, " H  ":  0.250
 CHARGE, GLYBK, " CA ":  0.100
-CHARGE, GLYBK, "1HA ":  0.000
-CHARGE, GLYBK, "2HA ":  0.000
+CHARGE, GLYBK, " HA2":  0.000
+CHARGE, GLYBK, " HA3":  0.000
 CHARGE, GLYBK, " O  ": -0.550
 CHARGE, GLYBK, " C  ":  0.550
 
@@ -35,8 +35,8 @@ CHARGE, GLYBK, " C  ":  0.550
 RADIUS,  GLYBK,  " N  ": 1.500,   1.750,   0.160
 RADIUS,  GLYBK,  " H  ": 1.000,   1.000,   0.020
 RADIUS,  GLYBK,  " CA ": 2.000,   2.000,   0.150
-RADIUS,  GLYBK,  "1HA ": 0.000,   1.000,   0.020
-RADIUS,  GLYBK,  "2HA ": 0.000,   1.000,   0.020
+RADIUS,  GLYBK,  " HA2": 0.000,   1.000,   0.020
+RADIUS,  GLYBK,  " HA3": 0.000,   1.000,   0.020
 RADIUS,  GLYBK,  " O  ": 1.400,   1.600,   0.200
 RADIUS,  GLYBK,  " C  ": 1.700,   2.000,   0.150
 

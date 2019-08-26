@@ -4,14 +4,11 @@ nav:
     - Overview: index.md
     - For Users:
         - users/install.md
+        - users/run.md
+        - users/ftpl.md
+        - users/analyze.md
     - For Developers:
         - developers/structure.md
         - developers/flow.md
 
 theme: readthedocs
-
-plugins:
-    - markdownmermaid
-
-extra_javascript:
-    - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js

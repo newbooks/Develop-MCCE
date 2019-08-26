@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../../img/favicon.ico" rel="shortcut icon"/>
+<title>Python MCCE - PyMCCE</title>
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" rel="stylesheet" type="text/css"/>
+<link href="../../css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../css/theme_extra.css" rel="stylesheet" type="text/css">
+<link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet"/>
+<script>
+    // Current page data
+    var mkdocs_page_name = "Python MCCE";
+    var mkdocs_page_input_path = "developers/flow.md";
+    var mkdocs_page_url = null;
+  </script>
+<script defer="" src="../../js/jquery-2.1.1.min.js"></script>
+<script defer="" src="../../js/modernizr-2.8.3.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</link></link></head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../.."> PyMCCE</a>
+</div>
+<div aria-label="main navigation" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul class="current">
+<li class="toctree-l1">
+<a class="" href="../..">Overview</a>
+</li>
+<li class="toctree-l1">
+<span class="caption-text">For Users</span>
+<ul class="subnav">
+<li class="">
+<a class="" href="../../users/install.md">None</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1">
+<span class="caption-text">For Developers</span>
+<ul class="subnav">
+<li class="">
+<a class="" href="../structure/">Structure</a>
+</li>
+<li class="current">
+<a class="current" href="./">Python MCCE</a>
+<ul class="subnav">
+<li class="toctree-l3"><a href="#python-mcce">Python MCCE</a></li>
+<ul>
+<li><a class="toctree-l4" href="#program-mechanism">Program Mechanism</a></li>
+<li><a class="toctree-l4" href="#program-structure">Program Structure</a></li>
+</ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+       
+    </nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="top navigation" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../..">PyMCCE</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content">
+<div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a href="../..">Docs</a> »</li>
+<li>For Developers »</li>
+<li>Python MCCE</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div role="main">
+<div class="section">
+<h1 id="python-mcce">Python MCCE</h1>
+<p>A Python version of Multi-Conformation Continuum Electrostatics simulation program to model protein electrostatic interactions.</p>
+<h2 id="program-mechanism">Program Mechanism</h2>
+<p>A protein or protein complex structure is broken down into pieces, usually amino acid residues and cofactors. Each piece may have charge, protonation, and position conformers. These peices interact with each other, and the piece conformers are sampled by Monte Carlo sampling to find their probabilty of occupancy at various conditions, such as pH, redox potention, chemical potential, and introduced charges.</p>
+<h2 id="program-structure">Program Structure</h2>
+<h3 id="step-1-break-structue-into-residues">Step 1: Break structue into residues</h3>
+<div class="mermaid">graph TD
+A1(run.prm)--&gt;B1((read prm))
+A2(input.pdb)--&gt;C1((read pdb))
+A3(tpl files)--&gt;B4((read tpl))
+subgraph Step 0: Load run control and tpl files
+    B1--&gt;B2[run_prm db]
+    B1--&gt;B4
+    B4--&gt;B5[tpl db]
+end
+B2--&gt;C1
+B5--&gt;C1
+subgraph Step 1: Break into residues
+    C1--&gt;C2((verify pdb))
+    C2--&gt;C3((to residues))
+    C3--&gt;C4((missing atoms))
+    C4--&gt;C5((ligand bonds))
+    C5--&gt;C6((NTR, CTR))
+end
+C6 --&gt;C7(step1_out.pdb)
+C6 --&gt;C8(head1.lst)
+</div>
+<h3 id="step-2-make-residue-conformers">Step 2: Make residue conformers</h3>
+<div class="mermaid">graph TD
+A1(run.prm)--&gt;B1((read prm))
+A3(tpl files)--&gt;B4((read tpl))
+subgraph Step 0: Load run control and tpl files
+    B1--&gt;B2[run_prm db]
+    B1--&gt;B4
+    B4--&gt;B5[tpl db]
+end
+B2--&gt;C1
+B5--&gt;C1
+B6(step1_out.pdb)--&gt;C1
+B7(head1.lst)--&gt;C1((readin))
+subgraph Step 2: Make residue conformers
+    C1--&gt;C2((charge&lt;br/&gt;conformers))
+    C2--&gt;C3((position&lt;br/&gt; conformers))
+    C3--&gt;C4((hbond &lt;br/&gt;conformers))
+end
+C4 --&gt;C5(step2_out.pdb)
+C4 --&gt;C6(head2.lst)
+</div>
+<h3 id="step-3-compute-energy-table">Step 3. Compute energy table</h3>
+<div class="mermaid">graph TD
+A1(run.prm)--&gt;B1((read prm))
+A3(tpl files)--&gt;B4((read tpl))
+subgraph Step 0: Load run control and tpl files
+    B1--&gt;B2[run_prm db]
+    B1--&gt;B4
+    B4--&gt;B5[tpl db]
+end
+B2--&gt;C1
+B6(step2_out.pdb)--&gt;C1((readin))
+subgraph Step 3: Make residue conformers
+    C1--&gt;C2((RXN delphi))
+    C2--&gt;C3((PW delphi))
+    C3--&gt;C4((boundary&lt;br/&gt;correction))
+end
+C4--&gt;C5(energies/*.opp)
+C4--&gt;C6(head3.lst)
+</div>
+<h3 id="step-4-monte-carlo-sampling-accessible-states">Step 4. Monte Carlo sampling: accessible states</h3>
+<div class="mermaid">graph TB
+A1(energies/*.opp)--&gt;B1(readin)
+A2(head3.lst)--&gt;B1
+A3(run.prm)--&gt;A4((read prm))
+A4--&gt;A5[prm db]
+A5--&gt;B1
+B1--&gt;B2((group into residues))
+B2--&gt;B3((verify flags))
+B3--&gt;B4((big list))
+B4--&gt;B5((loop over pH))
+B5--&gt;B6((independent&lt;br\&gt;runs))
+B6--&gt;B7((Monte Carlo sampling))
+B7--&gt;B7.1((record state))
+B7.1--&gt;B8{over?}
+B8--no--&gt;B6
+B8--yes--&gt;B9{next pH?}
+B9--no--&gt;B5
+B9--yes--&gt;B10((end))
+</div>
+</div>
+</div>
+<footer>
+<div aria-label="footer navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral" href="../structure/" title="Structure"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div class="rst-versions" role="note" style="cursor: pointer">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../structure/" style="color: #fcfcfc;">« Previous</a></span>
+</span>
+</div>
+<script>var base_url = '../..';</script>
+<script defer="" src="../../js/theme.js"></script>
+<script defer="" src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+<script>mermaid.initialize();</script></body>
+</html>

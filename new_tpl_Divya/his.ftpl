@@ -33,9 +33,9 @@ CONNECT, " CA ", HISBK: sp3, " N  ", " C  ", " CB ", " HA "
 CONNECT, " HA ", HISBK: s, " CA "
 CONNECT, " C  ", HISBK: sp2, " CA ", " O  ", " ?  "
 CONNECT, " O  ", HISBK: sp2, " C  "
-CONNECT, " CB ", HIS01: sp3, " CA ", " CG ", "1HB ", "2HB "
-CONNECT, "1HB ", HIS01: s, " CB "
-CONNECT, "2HB ", HIS01: s, " CB "
+CONNECT, " CB ", HIS01: sp3, " CA ", " CG ", " HB2", " HB3"
+CONNECT, " HB2", HIS01: s, " CB "
+CONNECT, " HB3", HIS01: s, " CB "
 CONNECT, " CG ", HIS01: sp2, " CB ", " ND1", " CD2"
 CONNECT, " ND1", HIS01: sp2, " CG ", " CE1"
 CONNECT, " CE1", HIS01: sp2, " ND1", " NE2", " HE1"
@@ -44,9 +44,9 @@ CONNECT, " NE2", HIS01: sp2, " CE1", " CD2", " HE2"
 CONNECT, " HE2", HIS01: s, " NE2"
 CONNECT, " CD2", HIS01: sp2, " NE2", " CG ", " HD2"
 CONNECT, " HD2", HIS01: s, " CD2"
-CONNECT, " CB ", HIS02: sp3, " CA ", " CG ", "1HB ", "2HB "
-CONNECT, "1HB ", HIS02: s, " CB "
-CONNECT, "2HB ", HIS02: s, " CB "
+CONNECT, " CB ", HIS02: sp3, " CA ", " CG ", " HB2", " HB3"
+CONNECT, " HB2", HIS02: s, " CB "
+CONNECT, " HB3", HIS02: s, " CB "
 CONNECT, " CG ", HIS02: sp2, " CB ", " ND1", " CD2"
 CONNECT, " ND1", HIS02: sp2, " CG ", " CE1", " HD1"
 CONNECT, " HD1", HIS02: s, " ND1"
@@ -55,9 +55,9 @@ CONNECT, " HE1", HIS02: s, " CE1"
 CONNECT, " NE2", HIS02: sp2, " CE1", " CD2"
 CONNECT, " CD2", HIS02: sp2, " NE2", " CG ", " HD2"
 CONNECT, " HD2", HIS02: s, " CD2"
-CONNECT, " CB ", HIS+1: sp3, " CA ", " CG ", "1HB ", "2HB "
-CONNECT, "1HB ", HIS+1: s, " CB "
-CONNECT, "2HB ", HIS+1: s, " CB "
+CONNECT, " CB ", HIS+1: sp3, " CA ", " CG ", " HB2", " HB3"
+CONNECT, " HB2", HIS+1: s, " CB "
+CONNECT, " HB3", HIS+1: s, " CB "
 CONNECT, " CG ", HIS+1: sp2, " CB ", " ND1", " CD2"
 CONNECT, " ND1", HIS+1: sp2, " CG ", " CE1", " HD1"
 CONNECT, " HD1", HIS+1: s, " ND1"
@@ -76,8 +76,8 @@ CHARGE, HISBK, " HA ":  0.000
 CHARGE, HISBK, " C  ":  0.550
 CHARGE, HISBK, " O  ": -0.550
 CHARGE, HIS01, " CB ":  0.125
-CHARGE, HIS01, "1HB ":  0.000
-CHARGE, HIS01, "2HB ":  0.000
+CHARGE, HIS01, " HB2":  0.000
+CHARGE, HIS01, " HB3":  0.000
 CHARGE, HIS01, " CG ":  0.155
 CHARGE, HIS01, " ND1": -0.560
 CHARGE, HIS01, " CE1":  0.155
@@ -87,8 +87,8 @@ CHARGE, HIS01, " HE2":  0.400
 CHARGE, HIS01, " CD2": -0.125
 CHARGE, HIS01, " HD2":  0.125
 CHARGE, HIS02, " CB ":  0.125
-CHARGE, HIS02, "1HB ":  0.000
-CHARGE, HIS02, "2HB ":  0.000
+CHARGE, HIS02, " HB2":  0.000
+CHARGE, HIS02, " HB3":  0.000
 CHARGE, HIS02, " CG ": -0.125
 CHARGE, HIS02, " ND1": -0.400
 CHARGE, HIS02, " HD1":  0.400
@@ -98,8 +98,8 @@ CHARGE, HIS02, " NE2": -0.560
 CHARGE, HIS02, " CD2":  0.155
 CHARGE, HIS02, " HD2":  0.125
 CHARGE, HIS+1, " CB ":  0.125
-CHARGE, HIS+1, "1HB ":  0.000
-CHARGE, HIS+1, "2HB ":  0.000
+CHARGE, HIS+1, " HB2":  0.000
+CHARGE, HIS+1, " HB3":  0.000
 CHARGE, HIS+1, " CG ":  0.142
 CHARGE, HIS+1, " ND1": -0.350
 CHARGE, HIS+1, " HD1":  0.450
@@ -118,8 +118,8 @@ RADIUS,  HISBK,  " HA ": 0.000,   1.000,   0.020
 RADIUS,  HISBK,  " C  ": 1.700,   2.000,   0.150
 RADIUS,  HISBK,  " O  ": 1.400,   1.600,   0.200
 RADIUS,  HIS01,  " CB ": 2.000,   2.000,   0.150
-RADIUS,  HIS01,  "1HB ": 0.000,   1.000,   0.020
-RADIUS,  HIS01,  "2HB ": 0.000,   1.000,   0.020
+RADIUS,  HIS01,  " HB2": 0.000,   1.000,   0.020
+RADIUS,  HIS01,  " HB3": 0.000,   1.000,   0.020
 RADIUS,  HIS01,  " CG ": 1.700,   2.000,   0.150
 RADIUS,  HIS01,  " ND1": 1.500,   1.750,   0.160
 RADIUS,  HIS01,  " CE1": 1.700,   2.000,   0.150
@@ -129,8 +129,8 @@ RADIUS,  HIS01,  " HE2": 1.000,   1.000,   0.020
 RADIUS,  HIS01,  " CD2": 1.700,   2.000,   0.150
 RADIUS,  HIS01,  " HD2": 1.000,   1.000,   0.020
 RADIUS,  HIS02,  " CB ": 2.000,   2.000,   0.150
-RADIUS,  HIS02,  "1HB ": 0.000,   1.000,   0.020
-RADIUS,  HIS02,  "2HB ": 0.000,   1.000,   0.020
+RADIUS,  HIS02,  " HB2": 0.000,   1.000,   0.020
+RADIUS,  HIS02,  " HB3": 0.000,   1.000,   0.020
 RADIUS,  HIS02,  " CG ": 1.700,   2.000,   0.150
 RADIUS,  HIS02,  " ND1": 1.500,   1.750,   0.160
 RADIUS,  HIS02,  " HD1": 1.000,   1.000,   0.020
@@ -140,8 +140,8 @@ RADIUS,  HIS02,  " NE2": 1.500,   1.750,   0.160
 RADIUS,  HIS02,  " CD2": 1.700,   2.000,   0.150
 RADIUS,  HIS02,  " HD2": 1.000,   1.000,   0.020
 RADIUS,  HIS+1,  " CB ": 2.000,   2.000,   0.150
-RADIUS,  HIS+1,  "1HB ": 0.000,   1.000,   0.020
-RADIUS,  HIS+1,  "2HB ": 0.000,   1.000,   0.020
+RADIUS,  HIS+1,  " HB2": 0.000,   1.000,   0.020
+RADIUS,  HIS+1,  " HB3": 0.000,   1.000,   0.020
 RADIUS,  HIS+1,  " CG ": 1.700,   2.000,   0.150
 RADIUS,  HIS+1,  " ND1": 1.500,   1.750,   0.160
 RADIUS,  HIS+1,  " HD1": 1.000,   1.000,   0.020

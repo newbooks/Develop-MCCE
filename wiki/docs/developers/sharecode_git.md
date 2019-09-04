@@ -27,9 +27,24 @@ upstream	https://github.com/GunnerLab/Develop-MCCE.git (push)
 ```
 
 Before I create a branch, update the master from upstream so all existing code is up to date.
+```bash
+(base) jmao@vivo:~/projects/Develop-MCCE$ git checkout master
+Already on 'master'
+Your branch is ahead of 'origin/master' by 7 commits.
+  (use "git push" to publish your local commits)
+(base) jmao@vivo:~/projects/Develop-MCCE$ git pull upstream master
+From https://github.com/GunnerLab/Develop-MCCE
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+``` 
+
+It's time to create a branch that matches the issue number:
+```bash
+(base) jmao@vivo:~/projects/Develop-MCCE$ git checkout -b issue#30
 ```
 
-``` 
+The "-b" switch makes a new branch if a branch with that name didn't already exist.  
+
 ### Develop code under the branch
 
 ### Create pull request 

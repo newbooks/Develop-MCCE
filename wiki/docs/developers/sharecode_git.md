@@ -64,6 +64,8 @@ mkdocs serve
 ```
 Then point browser to URL http://localhost:8000 to monitor mkdocs page.
 
+If everything goes well, the documentation site should be up. Any edits under wiki will be reflected by the above page.
+
 When it is ready to deploy as a github page, run
 ```
 mkdocs gh-deploy
@@ -72,7 +74,7 @@ mkdocs gh-deploy
 This will create another branch, which is a special branch linked to Github page, and pushed to Github automatically. So in this example, I actually end up with two branches:
 
    1. issue#30
-   2. gh-deploy
+   2. gh-pages   (already pushed to Github by ```mkdocs gh-deploy```)
   
 We only need to manually commit and push branch issue#30
 ```bash

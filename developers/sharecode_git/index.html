@@ -631,9 +631,17 @@ pip install markdown-include
 </pre></div>
 
 
-<p>This will create a gh-deploy branch. So in this example, I actually end up with two branches:
-  1. issue#30
-  2. gh-deploy</p>
+<p>This will create another branch, which is a special branch linked to Github page, and pushed to Github automatically. So in this example, I actually end up with two branches:</p>
+<ol>
+<li>issue#30</li>
+<li>gh-deploy</li>
+</ol>
+<p>We only need to manually commit and push branch issue#30</p>
+<div class="codehilite"><pre><span></span>git add bin/
+git commit -a -m <span class="s2">&quot;Added script to install mkdocs. closes #30&quot;</span>
+</pre></div>
+
+
 <h3 id="create-pull-request">Create pull request<a class="headerlink" href="#create-pull-request" title="Permanent link">&para;</a></h3>
                 
                   

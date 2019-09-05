@@ -1,5 +1,7 @@
 site_name: PyMCCE
 
+remote_name: upstream
+
 nav:
     - Overview: index.md
     - For Users:

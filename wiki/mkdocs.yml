@@ -1,0 +1,41 @@
+site_name: PyMCCE
+
+nav:
+    - Overview: index.md
+    - For Users:
+        - Installation: users/install.md
+        - Get Started: users/run.md
+        - Make new ftpl files: users/ftpl.md
+        - Analyze the results: users/analyze.md
+        - Tools Documentation: users/tools.md
+    - For Developers:
+        - Notes to Developers: developers/notes.md
+        - Git Cheat Sheet: developers/sharecode_git.md
+        - Program Structure: developers/structure.md
+        - Pymccelib: developers/pymccelib.md
+        - Writing Documentation: developers/mkdocs.md
+
+#theme: readthedocs
+
+theme:
+    name: material
+    logo:
+        icon: code
+    favicon: assets/favicon.ico
+    language: en
+    palette:
+        primary: grey
+        accent: orange
+    font:
+        text: Roboto
+        code: Roboto Mono
+    feature:
+        tabs: True
+
+markdown_extensions:
+    - toc:
+          permalink: true
+    - admonition
+    - markdown_blockdiag:
+          format: svg
+    - codehilite

@@ -2,7 +2,7 @@
 
 ## Git/github Cheat Sheet
 
-!!! Tip
+!!! Tips
     If you need a quick reference of setting up and using git/github, find git cheat sheet [here](https://github.com/newbooks/Develop-MCCE/raw/master/doc/gitcards.pdf).
 
 ## Sample workflow
@@ -83,6 +83,30 @@ git commit -a -m "Added script to install mkdocs. closes #30"
 git push
 ```
  
+"closes #30" in commit will tell Github to close the issue #30 at the time of merging to the upstream.
 
 ### Create pull request 
+After the changes are pushed to origin, go to your forked repository.
 
+!!! Tips
+    The most recently pushed branch should appear separately, and a button to create pull request next to it. This is a shortcut to make pull request.
+
+Under tab <> Code, change the branch to issue#30, then use the button on the right to make a new pull quest.
+
+The GunnerLab repo manager will review and approve your pull request.
+
+### Clean up
+Once the pull request is approved, the changes are compiled into the master branch of the main repository, and the branch issue#30 in your fork and local repository can be deleted.
+
+Under your local repo, 
+```
+git checkout master        # switch from branch to master
+git pull upstream master   # sync from upstream
+git branch delete issue#30 # delete the local issue branch
+git push origin --delete issue#30 # delete remote issue branch
+```
+
+Now both the local and upstream repo have the up to date code.
+    
+!!!Tips
+    Coding should take place only in issue branches. Master branch should be used only to sync from the upstream, and serve as a starting point of making your issue branches. This helps to avoid conflicts between upstream and forked repo. 

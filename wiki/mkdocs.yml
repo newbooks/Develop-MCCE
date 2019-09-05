@@ -10,7 +10,7 @@ nav:
         - Tools Documentation: users/tools.md
     - For Developers:
         - Notes to Developers: developers/notes.md
-        - Git Cheat Sheet: developers/sharecode_git.md
+        - Git Sample Workflow: developers/sharecode_git.md
         - Program Structure: developers/structure.md
         - Pymccelib: developers/pymccelib.md
         - Writing Documentation: developers/mkdocs.md

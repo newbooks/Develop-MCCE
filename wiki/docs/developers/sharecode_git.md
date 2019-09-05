@@ -80,7 +80,7 @@ We only need to manually commit and push branch issue#30
 ```bash
 git add bin/
 git commit -a -m "Added script to install mkdocs. closes #30"
-git push
+git push --set-upstream origin issue#30
 ```
  
 "closes #30" in commit will tell Github to close the issue #30 at the time of merging to the upstream.

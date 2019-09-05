@@ -38,12 +38,10 @@ From https://github.com/GunnerLab/Develop-MCCE
 Already up to date.
 ``` 
 
-It's time to create a branch that matches the issue number:
+It's time to create a new local branch that matches the issue number:
 ```bash
 (base) jmao@vivo:~/projects/Develop-MCCE$ git checkout -b issue#30
 ```
-
-The "-b" switch makes a new branch if a branch with that name didn't already exist.  
 
 ### Develop code under the branch
 

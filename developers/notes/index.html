@@ -36,7 +36,7 @@
     
     
       
-        <title>Program Structure - PyMCCE</title>
+        <title>Notes to Developers - PyMCCE</title>
       
     
     
@@ -83,6 +83,10 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#suggestions-to-developers" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -105,7 +109,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Program Structure
+                Notes to Developers
               
             </span>
           
@@ -185,7 +189,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../notes/" title="For Developers" class="md-tabs__link md-tabs__link--active">
+        <a href="./" title="For Developers" class="md-tabs__link md-tabs__link--active">
           For Developers
         </a>
       
@@ -337,11 +341,103 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../notes/" title="Notes to Developers" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Notes to Developers
+      </label>
+    
+    <a href="./" title="Notes to Developers" class="md-nav__link md-nav__link--active">
       Notes to Developers
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#print-and-log-messages" title="Print and log messages" class="md-nav__link">
+    Print and log messages
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging-levels-and-sample-usage" title="logging levels and sample usage" class="md-nav__link">
+    logging levels and sample usage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-of-using-logging-in-a-program" title="Example of using logging in a program" class="md-nav__link">
+    Example of using logging in a program
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-tutorials-and-books" title="Python tutorials and books" class="md-nav__link">
+    Python tutorials and books
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beginner-books" title="Beginner books" class="md-nav__link">
+    Beginner books
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehensive-reference" title="Comprehensive reference" class="md-nav__link">
+    Comprehensive reference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-books" title="Advanced books" class="md-nav__link">
+    Advanced books
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -361,18 +457,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" title="Program Structure" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../structure/" title="Program Structure" class="md-nav__link">
       Program Structure
     </a>
-    
   </li>
 
         
@@ -412,30 +501,182 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#print-and-log-messages" title="Print and log messages" class="md-nav__link">
+    Print and log messages
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging-levels-and-sample-usage" title="logging levels and sample usage" class="md-nav__link">
+    logging levels and sample usage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-of-using-logging-in-a-program" title="Example of using logging in a program" class="md-nav__link">
+    Example of using logging in a program
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-tutorials-and-books" title="Python tutorials and books" class="md-nav__link">
+    Python tutorials and books
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beginner-books" title="Beginner books" class="md-nav__link">
+    Beginner books
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehensive-reference" title="Comprehensive reference" class="md-nav__link">
+    Comprehensive reference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-books" title="Advanced books" class="md-nav__link">
+    Advanced books
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Program Structure</h1>
-                
-                <p>Main program:
-    pymcce</p>
-<p>Four steps:
-    premcce.py: convert to mcce pdb
-    mkconf.py: make conformers
-    mkenergy.py: caculate energy table
-    monte.py: Monte Carlo sampling of states</p>
-<p>Supporting modules:
-    pymccelib.py: mcce modules
-    geometry.py: geometry operations</p>
-<p>Analysis tools:
-    fitpka.py: Titration curve fitting
-    mfe.py: use mean field to analyze free energy</p>
-<p>Documentation site:
-    Use Mkdocs?
-    Installation: material plugin</p>
+                <h1 id="suggestions-to-developers">Suggestions to developers<a class="headerlink" href="#suggestions-to-developers" title="Permanent link">&para;</a></h1>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>Use Python 3</li>
+<li>Read PEP 8 (https://www.python.org/dev/peps/pep-0008/) </li>
+<li>Read PEP 20 (https://www.python.org/dev/peps/pep-0020/) </li>
+<li>Put constants, data structure and reusable functions in pymccelib.py so that the main program keeps focus on program flow.</li>
+<li>Put all python scripts in <code>bin/</code></li>
+<li>Put all program documentation in markdown language in <code>/wiki/docs/</code></li>
+</ul>
+</div>
+<h2 id="print-and-log-messages">Print and log messages<a class="headerlink" href="#print-and-log-messages" title="Permanent link">&para;</a></h2>
+<p>Use print() to print program result and logging module to print messages, allowing users to set verbose mode and level, and module functions to run at quiet mode.</p>
+<h3 id="logging-levels-and-sample-usage">logging levels and sample usage<a class="headerlink" href="#logging-levels-and-sample-usage" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Task</th>
+<th align="center">What to use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Display program output</td>
+<td align="center">print()</td>
+</tr>
+<tr>
+<td align="left">Debug information</td>
+<td align="center">logging.debug()</td>
+</tr>
+<tr>
+<td align="left">Confirmation that things are working as expected</td>
+<td align="center">logging.info()</td>
+</tr>
+<tr>
+<td align="left">Warning but program is still running</td>
+<td align="center">logging.warning()</td>
+</tr>
+<tr>
+<td align="left">Unexpected error that may cause program to stop or produce wrong result</td>
+<td align="center">logging.error()</td>
+</tr>
+<tr>
+<td align="left">Serious error that will break the program</td>
+<td align="center">logging.critical()</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-of-using-logging-in-a-program">Example of using logging in a program<a class="headerlink" href="#example-of-using-logging-in-a-program" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+
+<span class="k">def</span> <span class="nf">welcome</span><span class="p">():</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Welcome from function!&quot;</span><span class="p">)</span>
+    <span class="k">return</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Set logging level. DEBUG, INFO, WARNING, ERROR and CRITICAL are in the order from more details to less</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Welcome from main program!&quot;</span><span class="p">)</span>
+    <span class="n">welcome</span><span class="p">()</span>
+</pre></div>
+
+
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The logging.basicConfig() can only be declared only once, and before any logging messages!</p>
+</div>
+<h2 id="python-tutorials-and-books">Python tutorials and books<a class="headerlink" href="#python-tutorials-and-books" title="Permanent link">&para;</a></h2>
+<h3 id="beginner-books">Beginner books<a class="headerlink" href="#beginner-books" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Python Crash Course by Eric Matthes, 2nd Edition. Find on <a href="https://www.amazon.com/Python-Crash-Course-Eric-Matthes-ebook/dp/B07J4521M3/ref=sr_1_3?crid=9G2SVBJOI5HY&amp;keywords=python+crash+course&amp;qid=1559148694&amp;s=digital-text&amp;sprefix=Python+Crash%2Cdigital-text%2C117&amp;sr=1-3">Amazon</a>.</li>
+</ul>
+<h3 id="comprehensive-reference">Comprehensive reference<a class="headerlink" href="#comprehensive-reference" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Programming Python by Mark Lutz, 4th Edition. Find it on <a href="https://www.amazon.com/Programming-Python-Powerful-Object-Oriented-dp-0596158106/dp/0596158106/ref=mt_paperback?_encoding=UTF8&amp;me=&amp;qid=1559148286">Amazon</a>.</li>
+</ul>
+<h3 id="advanced-books">Advanced books<a class="headerlink" href="#advanced-books" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Python Cookbook by David Beazley and Brian Jones, Third edition. Find it on <a href="https://www.amazon.com/Python-Cookbook-Third-David-Beazley/dp/1449340377">Amazon</a>.</li>
+</ul>
                 
                   
                 
@@ -456,7 +697,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../sharecode_git/" title="Git Cheat Sheet" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../.." title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -465,11 +706,25 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Git Cheat Sheet
+                Overview
               </span>
             </div>
           </a>
         
+        
+          <a href="../sharecode_git/" title="Git Cheat Sheet" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Git Cheat Sheet
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>

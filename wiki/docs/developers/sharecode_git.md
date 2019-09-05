@@ -80,6 +80,7 @@ We only need to manually commit and push branch issue#30
 ```bash
 git add bin/
 git commit -a -m "Added script to install mkdocs. closes #30"
+git push
 ```
  
 

@@ -17,4 +17,4 @@ Analysis tools:
 
 Documentation site:
     Use Mkdocs?
-    Installation: material plugin, mermaid plugin
+    Installation: material plugin

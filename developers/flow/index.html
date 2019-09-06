@@ -1,0 +1,619 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>Python MCCE - PyMCCE</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#757575">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="grey" data-md-color-accent="orange">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#python-mcce" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="PyMCCE" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">code</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              PyMCCE
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Python MCCE
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link md-tabs__link--active">
+        Overview
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../users/install.md" class="md-tabs__link">
+          For Users
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../notes/" class="md-tabs__link">
+          For Developers
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="PyMCCE" class="md-nav__button md-logo">
+      
+        <i class="md-icon">code</i>
+      
+    </a>
+    PyMCCE
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      For Users
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        For Users
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../users/install.md" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../users/run.md" title="Get Started" class="md-nav__link">
+      Get Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../users/ftpl.md" title="Make new ftpl files" class="md-nav__link">
+      Make new ftpl files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../users/analyze.md" title="Analyze the results" class="md-nav__link">
+      Analyze the results
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../users/tools.md" title="Tools Documentation" class="md-nav__link">
+      Tools Documentation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      For Developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        For Developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../notes/" title="Notes to Developers" class="md-nav__link">
+      Notes to Developers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sharecode_git/" title="Git Sample Workflow" class="md-nav__link">
+      Git Sample Workflow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../structure/" title="Program Structure" class="md-nav__link">
+      Program Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../pymccelib.md" title="Pymccelib" class="md-nav__link">
+      Pymccelib
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mkdocs/" title="Writing Documentation" class="md-nav__link">
+      Writing Documentation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#program-mechanism" class="md-nav__link">
+    Program Mechanism
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#program-structure" class="md-nav__link">
+    Program Structure
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-break-structue-into-residues" class="md-nav__link">
+    Step 1: Break structue into residues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-make-residue-conformers" class="md-nav__link">
+    Step 2: Make residue conformers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-compute-energy-table" class="md-nav__link">
+    Step 3. Compute energy table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-monte-carlo-sampling-accessible-states" class="md-nav__link">
+    Step 4. Monte Carlo sampling: accessible states
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="python-mcce">Python MCCE<a class="headerlink" href="#python-mcce" title="Permanent link">&para;</a></h1>
+<p>A Python version of Multi-Conformation Continuum Electrostatics simulation program to model protein electrostatic interactions.</p>
+<h2 id="program-mechanism">Program Mechanism<a class="headerlink" href="#program-mechanism" title="Permanent link">&para;</a></h2>
+<p>A protein or protein complex structure is broken down into pieces, usually amino acid residues and cofactors. Each piece may have charge, protonation, and position conformers. These peices interact with each other, and the piece conformers are sampled by Monte Carlo sampling to find their probabilty of occupancy at various conditions, such as pH, redox potention, chemical potential, and introduced charges.</p>
+<h2 id="program-structure">Program Structure<a class="headerlink" href="#program-structure" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-break-structue-into-residues">Step 1: Break structue into residues<a class="headerlink" href="#step-1-break-structue-into-residues" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="n">graph</span> <span class="n">TD</span>
+<span class="n">A1</span><span class="p">(</span><span class="n">run</span><span class="p">.</span><span class="n">prm</span><span class="p">)</span><span class="o">--&gt;</span><span class="n">B1</span><span class="p">((</span><span class="n">read</span> <span class="n">prm</span><span class="p">))</span>
+<span class="n">A2</span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="n">pdb</span><span class="p">)</span><span class="o">--&gt;</span><span class="n">C1</span><span class="p">((</span><span class="n">read</span> <span class="n">pdb</span><span class="p">))</span>
+<span class="n">A3</span><span class="p">(</span><span class="n">tpl</span> <span class="n">files</span><span class="p">)</span><span class="o">--&gt;</span><span class="n">B4</span><span class="p">((</span><span class="n">read</span> <span class="n">tpl</span><span class="p">))</span>
+<span class="n">subgraph</span> <span class="n">Step</span> <span class="mi">0</span><span class="o">:</span> <span class="n">Load</span> <span class="n">run</span> <span class="n">control</span> <span class="n">and</span> <span class="n">tpl</span> <span class="n">files</span>
+    <span class="n">B1</span><span class="o">--&gt;</span><span class="n">B2</span><span class="p">[</span><span class="n">run_prm</span> <span class="n">db</span><span class="p">]</span>
+    <span class="n">B1</span><span class="o">--&gt;</span><span class="n">B4</span>
+    <span class="n">B4</span><span class="o">--&gt;</span><span class="n">B5</span><span class="p">[</span><span class="n">tpl</span> <span class="n">db</span><span class="p">]</span>
+<span class="n">end</span>
+<span class="n">B2</span><span class="o">--&gt;</span><span class="n">C1</span>
+<span class="n">B5</span><span class="o">--&gt;</span><span class="n">C1</span>
+<span class="n">subgraph</span> <span class="n">Step</span> <span class="mi">1</span><span class="o">:</span> <span class="n">Break</span> <span class="n">into</span> <span class="n">residues</span>
+    <span class="n">C1</span><span class="o">--&gt;</span><span class="n">C2</span><span class="p">((</span><span class="n">verify</span> <span class="n">pdb</span><span class="p">))</span>
+    <span class="n">C2</span><span class="o">--&gt;</span><span class="n">C3</span><span class="p">((</span><span class="n">to</span> <span class="n">residues</span><span class="p">))</span>
+    <span class="n">C3</span><span class="o">--&gt;</span><span class="n">C4</span><span class="p">((</span><span class="n">missing</span> <span class="n">atoms</span><span class="p">))</span>
+    <span class="n">C4</span><span class="o">--&gt;</span><span class="n">C5</span><span class="p">((</span><span class="n">ligand</span> <span class="n">bonds</span><span class="p">))</span>
+    <span class="n">C5</span><span class="o">--&gt;</span><span class="n">C6</span><span class="p">((</span><span class="n">NTR</span><span class="p">,</span> <span class="n">CTR</span><span class="p">))</span>
+<span class="n">end</span>
+<span class="n">C6</span> <span class="o">--&gt;</span><span class="n">C7</span><span class="p">(</span><span class="n">step1_out</span><span class="p">.</span><span class="n">pdb</span><span class="p">)</span>
+<span class="n">C6</span> <span class="o">--&gt;</span><span class="n">C8</span><span class="p">(</span><span class="n">head1</span><span class="p">.</span><span class="n">lst</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="step-2-make-residue-conformers">Step 2: Make residue conformers<a class="headerlink" href="#step-2-make-residue-conformers" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="n">graph</span> <span class="n">TD</span>
+<span class="n">A1</span><span class="p">(</span><span class="n">run</span><span class="p">.</span><span class="n">prm</span><span class="p">)</span><span class="o">--&gt;</span><span class="n">B1</span><span class="p">((</span><span class="n">read</span> <span class="n">prm</span><span class="p">))</span>
+<span class="n">A3</span><span class="p">(</span><span class="n">tpl</span> <span class="n">files</span><span class="p">)</span><span class="o">--&gt;</span><span class="n">B4</span><span class="p">((</span><span class="n">read</span> <span class="n">tpl</span><span class="p">))</span>
+<span class="n">subgraph</span> <span class="n">Step</span> <span class="mi">0</span><span class="o">:</span> <span class="n">Load</span> <span class="n">run</span> <span class="n">control</span> <span class="n">and</span> <span class="n">tpl</span> <span class="n">files</span>
+    <span class="n">B1</span><span class="o">--&gt;</span><span class="n">B2</span><span class="p">[</span><span class="n">run_prm</span> <span class="n">db</span><span class="p">]</span>
+    <span class="n">B1</span><span class="o">--&gt;</span><span class="n">B4</span>
+    <span class="n">B4</span><span class="o">--&gt;</span><span class="n">B5</span><span class="p">[</span><span class="n">tpl</span> <span class="n">db</span><span class="p">]</span>
+<span class="n">end</span>
+<span class="n">B2</span><span class="o">--&gt;</span><span class="n">C1</span>
+<span class="n">B5</span><span class="o">--&gt;</span><span class="n">C1</span>
+<span class="n">B6</span><span class="p">(</span><span class="n">step1_out</span><span class="p">.</span><span class="n">pdb</span><span class="p">)</span><span class="o">--&gt;</span><span class="n">C1</span>
+<span class="n">B7</span><span class="p">(</span><span class="n">head1</span><span class="p">.</span><span class="n">lst</span><span class="p">)</span><span class="o">--&gt;</span><span class="n">C1</span><span class="p">((</span><span class="n">readin</span><span class="p">))</span>
+<span class="n">subgraph</span> <span class="n">Step</span> <span class="mi">2</span><span class="o">:</span> <span class="n">Make</span> <span class="n">residue</span> <span class="n">conformers</span>
+    <span class="n">C1</span><span class="o">--&gt;</span><span class="n">C2</span><span class="p">((</span><span class="n">charge</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">conformers</span><span class="p">))</span>
+    <span class="n">C2</span><span class="o">--&gt;</span><span class="n">C3</span><span class="p">((</span><span class="n">position</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span> <span class="n">conformers</span><span class="p">))</span>
+    <span class="n">C3</span><span class="o">--&gt;</span><span class="n">C4</span><span class="p">((</span><span class="n">hbond</span> <span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">conformers</span><span class="p">))</span>
+<span class="n">end</span>
+<span class="n">C4</span> <span class="o">--&gt;</span><span class="n">C5</span><span class="p">(</span><span class="n">step2_out</span><span class="p">.</span><span class="n">pdb</span><span class="p">)</span>
+<span class="n">C4</span> <span class="o">--&gt;</span><span class="n">C6</span><span class="p">(</span><span class="n">head2</span><span class="p">.</span><span class="n">lst</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="step-3-compute-energy-table">Step 3. Compute energy table<a class="headerlink" href="#step-3-compute-energy-table" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="n">graph</span> <span class="n">TD</span>
+<span class="n">A1</span><span class="p">(</span><span class="n">run</span><span class="p">.</span><span class="n">prm</span><span class="p">)</span><span class="o">--&gt;</span><span class="n">B1</span><span class="p">((</span><span class="n">read</span> <span class="n">prm</span><span class="p">))</span>
+<span class="n">A3</span><span class="p">(</span><span class="n">tpl</span> <span class="n">files</span><span class="p">)</span><span class="o">--&gt;</span><span class="n">B4</span><span class="p">((</span><span class="n">read</span> <span class="n">tpl</span><span class="p">))</span>
+<span class="n">subgraph</span> <span class="n">Step</span> <span class="mi">0</span><span class="o">:</span> <span class="n">Load</span> <span class="n">run</span> <span class="n">control</span> <span class="n">and</span> <span class="n">tpl</span> <span class="n">files</span>
+    <span class="n">B1</span><span class="o">--&gt;</span><span class="n">B2</span><span class="p">[</span><span class="n">run_prm</span> <span class="n">db</span><span class="p">]</span>
+    <span class="n">B1</span><span class="o">--&gt;</span><span class="n">B4</span>
+    <span class="n">B4</span><span class="o">--&gt;</span><span class="n">B5</span><span class="p">[</span><span class="n">tpl</span> <span class="n">db</span><span class="p">]</span>
+<span class="n">end</span>
+<span class="n">B2</span><span class="o">--&gt;</span><span class="n">C1</span>
+<span class="n">B6</span><span class="p">(</span><span class="n">step2_out</span><span class="p">.</span><span class="n">pdb</span><span class="p">)</span><span class="o">--&gt;</span><span class="n">C1</span><span class="p">((</span><span class="n">readin</span><span class="p">))</span>
+<span class="n">subgraph</span> <span class="n">Step</span> <span class="mi">3</span><span class="o">:</span> <span class="n">Make</span> <span class="n">residue</span> <span class="n">conformers</span>
+    <span class="n">C1</span><span class="o">--&gt;</span><span class="n">C2</span><span class="p">((</span><span class="n">RXN</span> <span class="n">delphi</span><span class="p">))</span>
+    <span class="n">C2</span><span class="o">--&gt;</span><span class="n">C3</span><span class="p">((</span><span class="n">PW</span> <span class="n">delphi</span><span class="p">))</span>
+    <span class="n">C3</span><span class="o">--&gt;</span><span class="n">C4</span><span class="p">((</span><span class="n">boundary</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">correction</span><span class="p">))</span>
+<span class="n">end</span>
+<span class="n">C4</span><span class="o">--&gt;</span><span class="n">C5</span><span class="p">(</span><span class="n">energies</span><span class="cm">/*.opp)</span>
+<span class="cm">C4--&gt;C6(head3.lst)</span>
+</pre></div>
+
+
+<h3 id="step-4-monte-carlo-sampling-accessible-states">Step 4. Monte Carlo sampling: accessible states<a class="headerlink" href="#step-4-monte-carlo-sampling-accessible-states" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="n">graph</span> <span class="n">TB</span>
+<span class="nf">A1</span><span class="p">(</span><span class="n">energies</span><span class="cm">/*.opp)</span><span class="o">--&gt;</span><span class="n">B1</span><span class="p">(</span><span class="n">readin</span><span class="p">)</span>
+<span class="n">A2</span><span class="p">(</span><span class="n">head3</span><span class="p">.</span><span class="n">lst</span><span class="p">)</span><span class="o">--&gt;</span><span class="n">B1</span>
+<span class="n">A3</span><span class="p">(</span><span class="n">run</span><span class="p">.</span><span class="n">prm</span><span class="p">)</span><span class="o">--&gt;</span><span class="n">A4</span><span class="p">((</span><span class="n">read</span> <span class="n">prm</span><span class="p">))</span>
+<span class="n">A4</span><span class="o">--&gt;</span><span class="n">A5</span><span class="p">[</span><span class="n">prm</span> <span class="n">db</span><span class="p">]</span>
+<span class="n">A5</span><span class="o">--&gt;</span><span class="n">B1</span>
+<span class="n">B1</span><span class="o">--&gt;</span><span class="n">B2</span><span class="p">((</span><span class="n">group</span> <span class="n">into</span> <span class="n">residues</span><span class="p">))</span>
+<span class="n">B2</span><span class="o">--&gt;</span><span class="n">B3</span><span class="p">((</span><span class="n">verify</span> <span class="n">flags</span><span class="p">))</span>
+<span class="n">B3</span><span class="o">--&gt;</span><span class="n">B4</span><span class="p">((</span><span class="n">big</span> <span class="n">list</span><span class="p">))</span>
+<span class="n">B4</span><span class="o">--&gt;</span><span class="n">B5</span><span class="p">((</span><span class="n">loop</span> <span class="n">over</span> <span class="n">pH</span><span class="p">))</span>
+<span class="n">B5</span><span class="o">--&gt;</span><span class="n">B6</span><span class="p">((</span><span class="n">independent</span><span class="o">&lt;</span><span class="n">br</span><span class="err">\</span><span class="o">&gt;</span><span class="n">runs</span><span class="p">))</span>
+<span class="n">B6</span><span class="o">--&gt;</span><span class="n">B7</span><span class="p">((</span><span class="n">Monte</span> <span class="n">Carlo</span> <span class="n">sampling</span><span class="p">))</span>
+<span class="n">B7</span><span class="o">--&gt;</span><span class="n">B7</span><span class="mf">.1</span><span class="p">((</span><span class="n">record</span> <span class="n">state</span><span class="p">))</span>
+<span class="n">B7</span><span class="mf">.1</span><span class="o">--&gt;</span><span class="n">B8</span><span class="p">{</span><span class="n">over</span><span class="o">?</span><span class="p">}</span>
+<span class="n">B8</span><span class="o">--</span><span class="n">no</span><span class="o">--&gt;</span><span class="n">B6</span>
+<span class="n">B8</span><span class="o">--</span><span class="n">yes</span><span class="o">--&gt;</span><span class="n">B9</span><span class="p">{</span><span class="n">next</span> <span class="n">pH</span><span class="o">?</span><span class="p">}</span>
+<span class="n">B9</span><span class="o">--</span><span class="n">no</span><span class="o">--&gt;</span><span class="n">B5</span>
+<span class="n">B9</span><span class="o">--</span><span class="n">yes</span><span class="o">--&gt;</span><span class="n">B10</span><span class="p">((</span><span class="n">end</span><span class="p">))</span>
+</pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

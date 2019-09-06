@@ -4,6 +4,7 @@ MCCE (Multi-Conformation Continuum Electrostatics) is a biophysics simulation pr
 
 ## What can MCCE do?
 MCCE can calculate:
+
   * residue pka, cofactor Em and protein PI in protein-solvent systems;
   * protein structural responses to changes in charge;
   * residue ionization changes in response to protein structural changes;
@@ -11,6 +12,7 @@ MCCE can calculate:
 
 ## Project at a Glance:
 MCCE is a program developed at Marilyn Gunner's lab in City College of New York. Current development focuses are on the following aspects:
+
   * change residue/cofactor topology file into free format to make the procedure of integrating a new ligand easier.
   * make program friendly to distribute and easy to maintain.
   * develop tool sets to analyze MCCE results.

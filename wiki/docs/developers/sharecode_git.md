@@ -1,9 +1,9 @@
 # Collaborate through GIT
 
-## Git/github Cheat Sheet
-
-!!! Tips
-    If you need a quick reference of setting up and using git/github, find git cheat sheet [here](https://github.com/newbooks/Develop-MCCE/raw/master/doc/gitcards.pdf).
+!!! Tips "Tip: Git/github Cheat Sheet"
+    If you need a quick reference of setting up and using git/github, find [<span style="font-size: 
+    large">git cheat sheet here</span>](https://github
+    .com/newbooks/Develop-MCCE/raw/master/doc/gitcards.pdf).
 
 ## Sample workflow
 

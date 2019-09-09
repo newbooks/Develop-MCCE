@@ -46,7 +46,7 @@ Conversion from 1 kcal/mol to KT
 >>> print(KCAL2KT)
 1.688
 ```
-
+---
 ### KJ2KCAL
 **Definition:**
 
@@ -59,9 +59,37 @@ Conversion from 1kj/mol to kcal/mol.
 0.239
 ```
 
-
+---
 
 ## MCCE run environment
-MCCE run environment is in dictionary env.prm. The key is a 
+MCCE run environment can be retrieved from dictionary env.prm. Both key and values are in string type. 
+
+---
+### run.prm --> env.prm
+The file run.prm is translated to env.prm line by line. The last string in parenthesis is the key, 
+and the first string is the value.
+
+In file run.prm, line
+```
+f        step 1: pdb -> mcce pdb                            (DO_PREMCCE)
+```
+
+translates to:
+```
+env.prm["DO_MCCE"] = "f"
+```
+
+and line
+```
+1.0      pH interval                                        (TITR_PHD)
+```
+translates to:
+```
+env.prm[TITR_PHD] = "1.0"
+```
+---
+### Access env.prm
+
+### Exceptions and defaults 
 
 ## TPL file variables

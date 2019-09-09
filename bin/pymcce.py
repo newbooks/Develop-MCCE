@@ -8,7 +8,7 @@ from pymccelib import *
 def welcome():
     print("===========================================================")
     print("<<< MCCE Multi-Conformation Continuum Electrostatics >>>   ")
-    print(" Marilyn Gunner's Lab at City College of New York, 2005    ")
+    print(" Marilyn Gunner's Lab at City College of New York, 2019    ")
     print("-----------------------------------------------------------")
     print("Version:        %s" % env.version)
     print("MCCE Home Page: https://sites.google.com/site/mccewiki     ")

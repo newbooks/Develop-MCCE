@@ -13,8 +13,4 @@ EXTRA    PAA-1      1.0
 EXTRA    PDD-1      1.0
 EXTRA    TYR-1      -0.50
 
-SCALING  VDW0       0.125
-SCALING  VDW1       0.125
-SCALING  VDW        0.125
-SCALING  TORS       0.125
 

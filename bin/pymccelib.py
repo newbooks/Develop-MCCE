@@ -108,27 +108,31 @@ class Env:
 
 
     def prm_default(self):
-        if "TPL_FOLDER" not in self.prm or self.prm["TPL_FOLDER"] == "DEFAULT":
+        if "TPL_FOLDER" not in self.prm or self.prm["TPL_FOLDER"].upper() == "DEFAULT":
             path = str(os.path.dirname(os.path.abspath(__file__)))
             tpl_path = 'param'.join(path.rsplit('bin', 1))
             self.prm["TPL_FOLDER"] = tpl_path
             logging.info("   Default TPL_FOLDER is set to %s" % tpl_path)
-        elif "SCALING_VDW0" not in self.prm:
+        elif "DELPHI_EXE" not in self.prm or self.prm["DELPHI_EXE"].upper() == "DEFAULT":
+            path = str(os.path.dirname(os.path.abspath(__file__)))
+            self.prm["TPL_FOLDER"] = path
+            logging.info("   Default DELPHI_EXE is set to %s" % path)
+        elif "SCALING_VDW0" not in self.prm or self.prm["SCALING_VDW0"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_VDW0 = 1.0")
             self.prm["SCALING_VDW0"] = "1.0"
-        elif "SCALING_VDW1" not in self.prm:
+        elif "SCALING_VDW1" not in self.prm or self.prm["SCALING_VDW1"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_VDW1 = 1.0")
             self.prm["SCALING_VDW1"] = "1.0"
-        elif "SCALING_VDW" not in self.prm:
+        elif "SCALING_VDW" not in self.prm or self.prm["SCALING_VDW"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_VDW = 1.0")
             self.prm["SCALING_VDW"] = "1.0"
-        elif "SCALING_TORS" not in self.prm:
+        elif "SCALING_TORS" not in self.prm or self.prm["SCALING_TORS"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_TORS = 1.0")
             self.prm["SCALING_TORS"] = "1.0"
-        elif "SCALING_ELE" not in self.prm:
+        elif "SCALING_ELE" not in self.prm or self.prm["SCALING_ELE"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_ELE = 1.0")
             self.prm["SCALING_ELE"] = "1.0"
-        elif "SCALING_DSOLV" not in self.prm:
+        elif "SCALING_DSOLV" not in self.prm or self.prm["SCALING_DSOLV"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_DSOLV = 1.0")
             self.prm["SCALING_DSOLV"] = "1.0"
 

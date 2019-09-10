@@ -89,7 +89,7 @@ env.prm[TITR_PHD] = "1.0"
 ```
 ---
 
-### Access env.prm
+### Accessing env.prm
 
 **Example:**
 
@@ -110,19 +110,110 @@ f
 
 ---
 ### Exceptions and defaults 
-In run.prm, if a key is missing, or "DEFAULT" is used, the value will be interpreted in the context of the key:
 
-Here is the default value list:
+*In run.prm, if a key is missing, or "DEFAULT" is used, the value will be interpreted in the context of the key.*
 
-  * TPL_FOLDER
+
+**Example:**
 ```
 DEFAULT  tpl file folder path, "DEFAULT" to launch location (TPL_FOLDER)
 ```
-&nbsp&nbsp guyg
+
+The key TPL_FOLDER will be assigned a default value.
 
 
 ---
+#### TPL_FOLDER
+  
+Topology file folder. Default is relative location "```../param```" to the executable location.
 
-## TPL file variables
+blockdiag {
+A0 [label = "mcce root/"];
+A[label = "bin/"];
+B[label = "pymcce.py"];
+C[label = "param/"];
+D[label = "*.ftpl"];
 
-## Methods in env
+A0 -> A -> B;
+A0 -> C -> D;
+}
+
+
+The above example demonstrates where pymcce.py looks for topology files *.ftpl. 
+
+--- 
+
+#### DELPHI_EXE
+  
+The path of PB solver delphi. Default is the same directory where the main executable resides. 
+
+blockdiag {
+A0 [label = "mcce root/"];
+A[label = "bin/"];
+B[label = "pymcce.py"];
+C[label = "delphi"];
+
+A0 -> A -> B;
+A -> C;
+}
+
+
+The above example demonstrates where delphi executable is if pymcce.py was the main program. 
+
+--- 
+#### Scaling factors 
+Scaling factors are used by step 4, microstate sampling.
+
+|Name | Definition | Default|
+|---|---|---|
+| SCALING_VDW0 | Scaling factor of intra-conformer VDW | "1.0" |
+| SCALING_VDW1 | Scaling factor of sidechain to backbone VDW | "1.0" |
+| SCALING_VDW | Scaling factor of sidechain to sidechain VDW | " 1.0" |
+| SCALING_TORS | Scaling factor of torsion energy | " 1.0" |
+| SCALING_ELE | Scaling factor of electrostatic interaction | " 1.0" |
+| SCALING_DSOLV | Scaling factor of desolvation energy | " 1.0" |
+
+---
+
+
+## Topology records
+
+These records hold definitions of ligands, conformers, and molecular parameters. The records are located as 
+dictionary in env.tpl.
+
+### ftpl -> env.tpl
+
+Topology file is now free format. It has up to three keys, and a string as value. Key and value are 
+separated by ":", and three parts of key are separated by ",".
+
+**Example:**
+
+```
+CONNECT, " N  ", GLUBK: sp2, " ?  ", " CA ", " H  "
+```
+
+After converted, it is:
+```
+env.tpl[(CONNECT, " N  ", GLUBK)] = 'sp2, " ?  ", " CA ", " H  "'
+```
+
+Rules of reading ftpl files:
+
+  * **Comments:** Anything after "#" will not be read.
+  * **Free format:** Spaces are ignored unless inside quotes.
+  * **Delimiter of key and value:** ":" divides key and value.
+  * **Delimiter of key parts:** "," divides key parts. There can be up to 3 parts of a key.
+  * **Enclosing space in key and value:** space can be key or value when enclosed in quotes. 
+  * **Records with identical key:** the later key-value pair will overwrite the previous, with a warning.
+  * **Order of reading ftpl files:** ftpl files are read in alphabetic order in param directory and extra.ftpl is read 
+  last. 
+  
+
+### Accessing env.tpl
+
+
+
+
+
+
+## Functions in env

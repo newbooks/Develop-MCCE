@@ -37,6 +37,8 @@ ph       "ph" for pH titration, "eh" for eh titration       (TITR_TYPE)
 #############################################################################
 MODIFYING FOLLOWING ENTRIES REQUIRE ADVANCED KNOWLEDGE:
 -----------------------------------------------------------------------------
+step 3:
+DEFAULT  DelPhi executable                                  (DELPHI_EXE)
 
 step 4:
 5.0      Big pairwise threshold to make big list            (BIG_PAIRWISE)

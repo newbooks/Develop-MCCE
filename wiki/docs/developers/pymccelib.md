@@ -109,8 +109,16 @@ f
 ```
 
 ---
-
 ### Exceptions and defaults 
+In run.prm, if a key is missing, or "DEFAULT" is used, the value will be interpreted in the context of the key:
+
+Here is the default value list:
+
+  * TPL_FOLDER
+```
+DEFAULT  tpl file folder path, "DEFAULT" to launch location (TPL_FOLDER)
+```
+&nbsp&nbsp guyg
 
 
 ---

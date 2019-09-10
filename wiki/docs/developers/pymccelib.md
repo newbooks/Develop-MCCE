@@ -1,7 +1,7 @@
 # PyMCCE Library
 
 !!! Info
-    After importing the library, you have access to the constants, variables and functions:<br>
+    After importing the library, you have access to the constants, attributes and functions:<br>
     ```>>> from pymccelib import *  ```
     
 ## Constants
@@ -88,8 +88,33 @@ translates to:
 env.prm[TITR_PHD] = "1.0"
 ```
 ---
+
 ### Access env.prm
+
+**Example:**
+
+To access env.prm as a dictionary.
+
+```
+>>> from pymccelib import *     # import 
+>>> env.init()                  # load run.prm and ftpl files
+>>> print(env.prm)              # print out env.prm
+{'INPDB': 'prot.pdb', 'DO_PREMCCE': 'f', 'DO_ROTAMERS': 'f', 'DO_ENERGY': 'f', 'DO_MONTE': 'f', 'TPL_FOLDER': '/home/jmao/projects/Develop-MCCE/param', 'EXTRA': './extra.ftpl', 'TITR_TYPE': 'ph', 'TITR_PH0': '0.0', 'TITR_PHD': '1.0', 'TITR_EH0': '0.0', 'TITR_EHD': '30.0', 'TITR_STEPS': '15', 'BIG_PAIRWISE': '5.0', 'MONTE_FLIPS': '3', 'MONTE_T': '298.15', 'MONTE_NITER': '2000', 'MONTE_RUNS': '6', 'NSTATE_MAX': '1000000'}
+```
+
+To access individual parameter:
+```
+>>> print(env.prm["DO_PREMCCE"])
+f
+```
+
+---
 
 ### Exceptions and defaults 
 
+
+---
+
 ## TPL file variables
+
+## Methods in env

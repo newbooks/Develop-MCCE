@@ -46,7 +46,7 @@ or
 
 If ```gh-deploy``` reports conflict in special branch gh-pages, use "--force" switch to overwrite:
 ```
-mkdocs --force gh-deploy
+mkdocs gh-deploy --force
 ```
 
 The published site is on: [https://gunnerlab.github.io/Develop-MCCE/](https://gunnerlab.github.io/Develop-MCCE/).

@@ -205,14 +205,40 @@ Rules of reading ftpl files:
   * **Delimiter of key parts:** "," divides key parts. There can be up to 3 parts of a key.
   * **Enclosing space in key and value:** space can be key or value when enclosed in quotes. 
   * **Records with identical key:** the later key-value pair will overwrite the previous, with a warning.
-  * **Order of reading ftpl files:** ftpl files are read in alphabetic order in param directory and extra.ftpl is read 
-  last. 
+  * **Order of reading ftpl files:** ```ftpl files in param/``` folder are read in alphabetic order and ```extra
+  .ftpl``` defined in run.prm is read last. 
   
+### Native and derived tpl entries
+Native entries are directly translated from ftpl files. All values are strings.
+
+## Native entries
+
+| Primary Key | Key example | Explanation |
+|---|---|---|
+| CONFLIST | ("CONFLIST", "GLU") | returns a conformer list from a residue name |
+| CONNECT |("CONNECT", " N  ", "GLUBK")| returns orbital type and a list of connected atoms |
+| CHARGE |("CHARGE", "GLUBK", " N  ") | returns atom charge |
+| RADIUS |("RADIUS", "GLUBK",  " N  ")| dielectric boundary radius, VDW radius and energy well depth|
+| CONFORMER|("CONFORMER", "GLU01")| Conformer self energy terms |
+| ROTATE |("ROTATE", "GLU")| Residue rotatable bonds |
+
+## Derived entries
+Derived entries are converted or structured entries derived from native entries. 
+
+
 
 ### Accessing env.tpl
+Native and derived tpl entries can be accessed by visiting respected dictionaries in env. Value data type varies.
 
-
-
+**Example**
+```
+>>> from pymccelib import *
+>>> env.init()
+>>> print(env.tpl[("CHARGE", "GLUBK", " N  ")])
+-0.350
+>>> print(env.atomnames["GLU01"])
+[' CB ', ' HB2', ' HB3', ' CG ', ' HG2', ' HG3', ' CD ', ' OE1', ' HE1', ' OE2']
+```
 
 
 

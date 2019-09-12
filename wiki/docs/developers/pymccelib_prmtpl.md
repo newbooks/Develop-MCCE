@@ -211,7 +211,7 @@ Rules of reading ftpl files:
 ### Native and derived tpl entries
 Native entries are directly translated from ftpl files. All values are strings.
 
-## Native entries
+#### Native entries
 
 | Primary Key | Key example | Explanation |
 |---|---|---|
@@ -222,10 +222,18 @@ Native entries are directly translated from ftpl files. All values are strings.
 | CONFORMER|("CONFORMER", "GLU01")| Conformer self energy terms |
 | ROTATE |("ROTATE", "GLU")| Residue rotatable bonds |
 
-## Derived entries
+!!! Note
+    Native entries are stored in env.tpl{}.
+
+#### Derived entries
 Derived entries are converted or structured entries derived from native entries. 
 
+| Name | Example | Explanation |
+| --- | --- | --- |
+|env.atomenames{}| env.atomnames["GLUBK"] | atom names derived from CONNECT records|
 
+!!! Note
+    Derived entries are stored in separate env attributes.
 
 ### Accessing env.tpl
 Native and derived tpl entries can be accessed by visiting respected dictionaries in env. Value data type varies.
@@ -241,5 +249,34 @@ Native and derived tpl entries can be accessed by visiting respected dictionarie
 ```
 
 
-
 ## Functions in env
+---
+### env.init()
+*Initialize mcce running environment.*
+
+**Synopsis:**
+```
+env.init()
+```
+
+**Description:**
+
+This subroutine does:
+
+  * Read run.prm, and set default values for missing parameters.
+  * Read param/*.ftpl and extra.ftpl; initialize env.tpl{} and derived tpl entries.  
+
+---
+
+### env.print_runprm()
+*Print all env.prm entries*
+
+**Synopsis:**
+
+```
+env.print_runprm()
+```
+
+This subroutine prints out all env.prm entries for debug purpose.
+ 
+---

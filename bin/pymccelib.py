@@ -106,49 +106,47 @@ class Env:
 
         return
 
-
     def prm_default(self):
         if "TPL_FOLDER" not in self.prm or self.prm["TPL_FOLDER"].upper() == "DEFAULT":
             path = str(os.path.dirname(os.path.abspath(__file__)))
             tpl_path = 'param'.join(path.rsplit('bin', 1))
             self.prm["TPL_FOLDER"] = tpl_path
             logging.info("   Default TPL_FOLDER is set to %s" % tpl_path)
-        elif "DELPHI_EXE" not in self.prm or self.prm["DELPHI_EXE"].upper() == "DEFAULT":
+        if "DELPHI_EXE" not in self.prm or self.prm["DELPHI_EXE"].upper() == "DEFAULT":
             path = str(os.path.dirname(os.path.abspath(__file__)))
             self.prm["TPL_FOLDER"] = path
             logging.info("   Default DELPHI_EXE is set to %s" % path)
-        elif "SCALING_VDW0" not in self.prm or self.prm["SCALING_VDW0"].upper() == "DEFAULT":
+        if "SCALING_VDW0" not in self.prm or self.prm["SCALING_VDW0"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_VDW0 = 1.0")
             self.prm["SCALING_VDW0"] = "1.0"
-        elif "SCALING_VDW1" not in self.prm or self.prm["SCALING_VDW1"].upper() == "DEFAULT":
+        if "SCALING_VDW1" not in self.prm or self.prm["SCALING_VDW1"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_VDW1 = 1.0")
             self.prm["SCALING_VDW1"] = "1.0"
-        elif "SCALING_VDW" not in self.prm or self.prm["SCALING_VDW"].upper() == "DEFAULT":
+        if "SCALING_VDW" not in self.prm or self.prm["SCALING_VDW"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_VDW = 1.0")
             self.prm["SCALING_VDW"] = "1.0"
-        elif "SCALING_TORS" not in self.prm or self.prm["SCALING_TORS"].upper() == "DEFAULT":
+        if "SCALING_TORS" not in self.prm or self.prm["SCALING_TORS"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_TORS = 1.0")
             self.prm["SCALING_TORS"] = "1.0"
-        elif "SCALING_ELE" not in self.prm or self.prm["SCALING_ELE"].upper() == "DEFAULT":
+        if "SCALING_ELE" not in self.prm or self.prm["SCALING_ELE"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_ELE = 1.0")
             self.prm["SCALING_ELE"] = "1.0"
-        elif "SCALING_DSOLV" not in self.prm or self.prm["SCALING_DSOLV"].upper() == "DEFAULT":
+        if "SCALING_DSOLV" not in self.prm or self.prm["SCALING_DSOLV"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_DSOLV = 1.0")
             self.prm["SCALING_DSOLV"] = "1.0"
 
         return
 
-
     def print_scaling(self):
         """Print scaling factors."""
         # print self.param
         print("      Scaling factors:")
-        print("      VDW0  = %.3f" % self.tpl[("SCALING", "VDW0")])
-        print("      VDW1  = %.3f" % self.tpl[("SCALING", "VDW1")])
-        print("      VDW   = %.3f" % self.tpl[("SCALING", "VDW")])
-        print("      TORS  = %.3f" % self.tpl[("SCALING", "TORS")])
-        print("      ELE   = %.3f" % self.tpl[("SCALING", "ELE")])
-        print("      DSOLV = %.3f" % self.tpl[("SCALING", "DSOLV")])
+        print("      VDW0  = %.3f" % self.prm["SCALING_VDW0"])
+        print("      VDW1  = %.3f" % self.prm["SCALING_VDW1"])
+        print("      VDW   = %.3f" % self.prm["SCALING_VDW"])
+        print("      TORS  = %.3f" % self.prm["SCALING_TORS"])
+        print("      ELE   = %.3f" % self.prm["SCALING_ELE"])
+        print("      DSOLV = %.3f" % self.prm["SCALING_DSOLV"])
         return
 
     def load_ftpldir(self):

@@ -14,7 +14,8 @@ nav:
         - Notes to Developers: developers/notes.md
         - Git Sample Workflow: developers/sharecode_git.md
         - Program Structure: developers/structure.md
-        - Pymccelib: developers/pymccelib.md
+        - Pymccelib:
+            - Reading Parameters: developers/pymccelib_prmtpl.md
         - Writing Documentation: developers/mkdocs.md
 
 #theme: readthedocs

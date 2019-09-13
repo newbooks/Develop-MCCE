@@ -280,3 +280,29 @@ env.print_runprm()
 This subroutine prints out all env.prm entries for debug purpose.
  
 ---
+
+### env.print_scaling()
+*Print all scaling factors*
+
+**Synopsis:**
+
+```
+env.print_scaling()
+```
+
+This subroutine prints out scaling factors used by microstate sampling for debug purpose.
+ 
+---
+
+### load_ftpl(self, file)
+*Load an individual ftpl file*
+
+**Synopsis:**
+
+```
+env.load_ftpl(ftpl_file_path)
+```
+
+This subroutine loads an individual ftpl file. MCCE loads all ftple files from location defined by line (TPL_FOLDER) in run.prm. One can load additional ftpl files to supplement or overwrite entries previously defined. 
+ 
+---

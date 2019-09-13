@@ -46,7 +46,7 @@ or
 
 If ```gh-deploy``` reports conflict in special branch gh-pages, use "--force" switch to overwrite:
 ```
-mkdocs --force gh-deploy
+mkdocs gh-deploy --force
 ```
 
 The published site is on: [https://gunnerlab.github.io/Develop-MCCE/](https://gunnerlab.github.io/Develop-MCCE/).
@@ -59,3 +59,5 @@ The published site is on: [https://gunnerlab.github.io/Develop-MCCE/](https://gu
 **More on syntax:** [https://alinex.gitlab.io/env/mkdocs/](https://alinex.gitlab.io/env/mkdocs/)
 
 **Diagram:** [http://blockdiag.com/en/blockdiag/](http://blockdiag.com/en/blockdiag/)
+
+**PyDown:** [https://facelessuser.github.io/pymdown-extensions/extensions/arithmatex/](https://facelessuser.github.io/pymdown-extensions/extensions/arithmatex/)

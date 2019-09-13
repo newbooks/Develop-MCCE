@@ -69,6 +69,7 @@ class Env:
 
     def load_ftpl(self, file):
         """Load a tpl file."""
+        print(file)
 
         lines = open(file).readlines()
         for line in lines:
@@ -114,7 +115,7 @@ class Env:
             logging.info("   Default TPL_FOLDER is set to %s" % tpl_path)
         if "DELPHI_EXE" not in self.prm or self.prm["DELPHI_EXE"].upper() == "DEFAULT":
             path = str(os.path.dirname(os.path.abspath(__file__)))
-            self.prm["TPL_FOLDER"] = path
+            self.prm["DELPHI_EXE"] = path
             logging.info("   Default DELPHI_EXE is set to %s" % path)
         if "SCALING_VDW0" not in self.prm or self.prm["SCALING_VDW0"].upper() == "DEFAULT":
             logging.info("      Set to default: SCALING_VDW0 = 1.0")
@@ -153,6 +154,7 @@ class Env:
         cwd = os.getcwd()
         os.chdir(self.ftpldir)
         files = glob.glob("*.ftpl")
+        files.sort()
         logging.info("   Loading ftpl files from %s" % self.ftpldir)
         for fname in files:
             self.load_ftpl(fname)

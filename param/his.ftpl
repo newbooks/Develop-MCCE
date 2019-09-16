@@ -158,5 +158,4 @@ CONFORMER, HIS02: Em0=   0.0, pKa0=  0.00, ne= 0, nH= 0, rxn02= -7.84, rxn04= -4
 CONFORMER, HIS+1: Em0=   0.0, pKa0=  6.98, ne= 0, nH= 1, rxn02= -33.76, rxn04= -16.100, rxn08= -7.72
 
 # Rotatable bonds. The atoms extended in the bond direction will all be rotated.
-ROTATE, HIS: " CB " - " CG "
-ROTATE, HIS: " CA " - " CB "
+ROTATE, HIS: " CB " - " CG ", " CA " - " CB "

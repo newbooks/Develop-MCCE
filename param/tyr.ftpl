@@ -144,5 +144,4 @@ CONFORMER, TYR01: Em0=   0.0, pKa0=  0.00, ne= 0, nH= 0, rxn02= -5.880, rxn04= -
 CONFORMER, TYR-1: Em0=   0.0, pKa0= 10.20, ne= 0, nH=-1, rxn02=-41.040, rxn04= -19.7, rxn08= -9.33
 
 # Rotatable bonds. The atoms extended in the bond direction will all be rotated.
-ROTATE, TYR: " CA " - " CB "
-ROTATE, TYR: " CB " - " CG "
+ROTATE, TYR: " CA " - " CB ", " CB " - " CG "

@@ -23,7 +23,3 @@ EXTRAE, PAA-1,     : 1.0
 EXTRAE, PDD-1,     : 1.0
 EXTRAE, TYR-1,     : -0.5
 
-SCALING, VDW0,     : 0.125
-SCALING, VDW1,     : 0.125
-SCALING, VDW,     : 0.125
-SCALING, TORS,     : 0.125

@@ -262,7 +262,4 @@ CONFORMER, ARG03: Em0=   0.0, pKa0=  0.00, ne= 0, nH= 0, rxn02= -8.650, rxn04= -
 CONFORMER, ARG+1: Em0=   0.0, pKa0= 12.50, ne= 0, nH= 1, rxn02=-34.200, rxn04= -16.4, rxn08= -7.79
 
 # Rotatable bonds. The atoms extended in the bond direction will all be rotated.
-ROTATE, ARG: " CA " - " CB "
-ROTATE, ARG: " CB " - " CG "
-ROTATE, ARG: " CG " - " CD "
-ROTATE, ARG: " CD " - " NE "
+ROTATE, ARG: " CA " - " CB ", " CB " - " CG ", " CG " - " CD ",  " CD " - " NE "

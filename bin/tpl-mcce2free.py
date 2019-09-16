@@ -99,7 +99,7 @@ class Paramfile:
 
         # Make rotatable bonds
         self.tplout.append("\n# Rotatable bonds. The atoms extended in the bond direction will all be rotated.\n")
-        lines = []
+        bonds = []
         for key in self.mccedb.keys():
             if key[0] == "ROTAMER":
                 residue = key[1]
@@ -107,9 +107,12 @@ class Paramfile:
                 atom1 = "\"%s\"" % value[:4]
                 atom2 = "\"%s\"" % value[5:9]
                 bond = "%s - %s" % (atom1, atom2)
-                line = "ROTATE, %s: %s\n" % (residue, bond)
-                lines.append(line)
-        self.tplout += lines
+                bonds.append(bond)
+        if bonds:
+            line = "ROTATE, %s: %s\n" % (residue, ", ".join(bonds))
+            self.tplout += line
+
+
 
         # Direct translate: This part directly translate mcce to free format
         lines = []

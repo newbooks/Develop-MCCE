@@ -69,7 +69,7 @@ class Env:
 
     def load_ftpl(self, file):
         """Load a tpl file."""
-        print(file)
+        logging.debug("   Loading from file %s" % file)
 
         lines = open(file).readlines()
         for line in lines:
@@ -85,15 +85,11 @@ class Env:
             keys = tuple(keys)
 
             value_string = fields[1].strip()
-            if keys in self.tpl:
-                if value_string == "!!!":
-                # Special rule to negate a key, it is used by the last loaded ftpl file
-                # to overwrite values that might have been defined before.
-                    del self.tpl[keys]
-                else:
-                    self.tpl[keys] = self.tpl[keys] + " , " + value_string
-            else:
-                self.tpl[keys] = value_string
+            if keys in self.tpl:   # Overwrite
+                logging.warning("   Value of \"%s\": (%s) is replaced by (%s)" % (",".join(keys), self.tpl[keys],
+                                                                                   value_string))
+
+            self.tpl[keys] = value_string
 
             # Make an atom list in the natural order of CONNECT record.
             if keys[0] == "CONNECT":

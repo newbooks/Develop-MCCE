@@ -69,7 +69,7 @@ class Env:
 
     def load_ftpl(self, file):
         """Load a tpl file."""
-        print(file)
+        logging.debug("      %s" % file)
 
         lines = open(file).readlines()
         for line in lines:
@@ -162,6 +162,46 @@ class Env:
         os.chdir(cwd)
         return
 
+    def ftpl2tpl(self):
+        """Convert env.tpl to mcce tpl file"""
+
+        # Get a list of residues
+        residues = []
+        for key in self.tpl:
+            if key[0] == "CONFLIST":
+                residues.append(key[1])
+
+        for residue in residues:
+            # CONFLIST
+
+            # NATOM
+
+            # IATOM
+
+            # ATOMNAME
+
+            # PROTON
+
+            # PKA
+
+            # ELECTRON
+
+            # EM
+
+            # RXN
+
+            # CONNECT
+
+            # RADIUS
+
+            # CHARGE
+
+            # ROTAMER
+
+            # DONOR and ACCEPTOR, for old mcce only, move to 00always_needed.ftpl
+
+        # scaling factor to tpl record
+        return
 
 class Atom:
     def __init__(self):

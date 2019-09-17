@@ -306,3 +306,15 @@ env.load_ftpl(ftpl_file_path)
 This subroutine loads an individual ftpl file. MCCE loads all ftple files from location defined by line (TPL_FOLDER) in run.prm. One can load additional ftpl files to supplement or overwrite entries previously defined. 
  
 ---
+
+### ftpl2tpl(self, file)
+*Convert env.tpl (in ftpl format) to a tpl file for backward compatibility*
+
+**Synopsis:**
+
+```
+env.ftpl2tpl(tpl_file_name)
+```
+
+This subroutine converts existing env.tpl{} to a single tpl file that old mcce can read.
+---

@@ -30,3 +30,5 @@ if __name__ == "__main__":
     welcome()
     env.init()
 
+    env.ftpl2tpl()
+

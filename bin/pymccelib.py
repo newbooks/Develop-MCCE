@@ -198,8 +198,8 @@ class Env:
 
             # ROTAMER
 
-            # DONOR and ACCEPTOR, for old mcce only, move to 00always_needed.ftpl
 
+        # append 00always
         # scaling factor to tpl record
         return
 

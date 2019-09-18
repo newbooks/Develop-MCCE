@@ -162,17 +162,22 @@ class Env:
         os.chdir(cwd)
         return
 
-    def ftpl2tpl(self):
+    def ftpl2tpl(self, fname):
         """Convert env.tpl to mcce tpl file"""
 
         # Get a list of residues
         residues = []
+        lines = []
+
         for key in self.tpl:
             if key[0] == "CONFLIST":
                 residues.append(key[1])
 
         for residue in residues:
             # CONFLIST
+            key = ("CONFLIST", residue)
+            value = ["%5s" % x.strip() for x in self.tpl[key].split(",")]
+            lines.append("CONFLIST %s        %s\n\n" % (residue, " ".join(value)))
 
             # NATOM
 
@@ -201,6 +206,8 @@ class Env:
 
         # append 00always
         # scaling factor to tpl record
+
+        open(fname, "w").writelines(lines)
         return
 
 class Atom:

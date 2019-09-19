@@ -1,0 +1,26 @@
+20190918
+Modification about microstate from standard MC and ENUMERATE
+Modifacation about hydrogen bond analysis at step 6.
+
+Detailed modification:
+1. param02/04/08: add hb.tpl (defination of donor and acceptor atoms)
+2. mcce.c: add extern "C", because it will compile by g++ compiler. add step 6 do_analysis part (run hbond matrix on step2_out.pdb and hbond network on MC microstate )
+3. run.prm.quick: add (MS_GOLD_OUT), (MS_OUT), (RE_MS_OUT),Step 6 parameters 
+4. init.c: add default parameter setting and user paramter reading
+5. write_ms_gold.c: add the new subroutin, this is to write out ms_gold file at step 2.
+6. Makefile: add write_ms_gold.c to compile
+7. mcce.h: define ENV and module variables
+8. rotamers.c: add the codes to call write_ms_gold.c
+9. monte.c: add MC_smp and enumerate_new subroutines (output microstate)
+10. analysis.c: step 6 module, writen by c++  
+11. Makefile: g++ analysis.c and compile main code by c++ complier 
+
+Compile:
+make clean
+make
+
+test:
+../testsuite/test1
+
+Todo:
+1. param_get can't get hb.tpl successfully, needs to correct

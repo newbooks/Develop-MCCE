@@ -1,0 +1,1033 @@
+ 
+Building target: dplt
+Invoking: C++ Linker
+mpicxx -cxx=icpc -wd3802 dplt.cpp -O3 -DNDEBUG -std=c99 -mtune=native -march=native -mfpmath=sse -DDDM_RELEASE -DDDM_ENABLE_ASSERTIONS -DDART_ENABLE_ASSERTIONS -DDART -DDART_MPI_IMPL_ID="mpich" -DDART_MPI_IMPL_IS_MPICH -DDART_MPI_ENABLE_UNIFIED_MEMORY_MODEL -DDART_MPI_DISABLE_SHARED_WINDOWS    ./ddm/dart-impl/array.o ./ddm/dart-impl/dart_config.o ./ddm/dart-impl/dart_initialization.o ./ddm/dart-impl/dart_locality.o ./ddm/dart-impl/dart_mem.o ./ddm/dart-impl/dart_synchronization.o ./ddm/dart-impl/dart_team_private.o ./ddm/dart-impl/host_topology.o ./ddm/dart-impl/locality.o ./ddm/dart-impl/papi.o ./ddm/dart-impl/unit_locality.o ./ddm/dart-impl/dart_communication.o ./ddm/dart-impl/dart_globmem.o ./ddm/dart-impl/dart_io_hdf5.o ./ddm/dart-impl/dart_locality_priv.o ./ddm/dart-impl/dart_segment.o ./ddm/dart-impl/dart_team_group.o ./ddm/dart-impl/domain_locality.o ./ddm/dart-impl/hwinfo.o ./ddm/dart-impl/logging.o ./ddm/dart-impl/string.o ./ddm/BenchmarkParams.o ./ddm/Distribution.o ./ddm/Init.o ./ddm/LocalityDomain.o ./ddm/Logging.o ./ddm/StackTrace.o ./ddm/SUMMA.o ./ddm/TeamLocality.o ./ddm/TimestampClockPosix.o ./ddm/TimestampPAPI.o ./ddm/TypeInfo.o ./ddm/Config.o ./ddm/GlobPtr.o ./ddm/Locality.o ./ddm/LocalityJSONPrinter.o ./ddm/Math.o ./ddm/StreamConversion.o ./ddm/Team.o ./ddm/Timer.o ./ddm/TimestampCounterPosix.o ./ddm/Trace.o -o dplt
+icpc: command line warning #10381: option '-std=c99' is not valid for C++ compilations
+In file included from /software/gcc/5.3.0/include/c++/5.3.0/array(35),
+                 from ddm/Types.h(4),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+/software/gcc/5.3.0/include/c++/5.3.0/bits/c++0x_warning.h(32): error: #error directive: This file requires compiler and library support for the ISO C++ 2011 standard. This support is currently experimental, and must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
+  #error This file requires compiler and library support for the \
+   ^
+
+In file included from ddm/Types.h(7),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/dart-impl/dart_types.h(132): error: identifier "constexpr" is undefined
+    constexpr dart_global_unit() : id(DART_UNDEFINED_UNIT_ID) { }
+    ^
+
+In file included from ddm/Types.h(7),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/dart-impl/dart_types.h(132): error: member function with the same name as its class must be a constructor
+    constexpr dart_global_unit() : id(DART_UNDEFINED_UNIT_ID) { }
+              ^
+
+In file included from ddm/Types.h(7),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/dart-impl/dart_types.h(132): error: expected a ";"
+    constexpr dart_global_unit() : id(DART_UNDEFINED_UNIT_ID) { }
+                                 ^
+
+In file included from ddm/Types.h(7),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/dart-impl/dart_types.h(135): warning #12: parsing restarts here after previous syntax error
+    dart_unit_t id;
+                  ^
+
+In file included from ddm/Types.h(7),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/dart-impl/dart_types.h(146): error: identifier "constexpr" is undefined
+    constexpr dart_local_unit() : id(DART_UNDEFINED_UNIT_ID) { }
+    ^
+
+In file included from ddm/Types.h(7),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/dart-impl/dart_types.h(146): error: member function with the same name as its class must be a constructor
+    constexpr dart_local_unit() : id(DART_UNDEFINED_UNIT_ID) { }
+              ^
+
+In file included from ddm/Types.h(7),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/dart-impl/dart_types.h(146): error: expected a ";"
+    constexpr dart_local_unit() : id(DART_UNDEFINED_UNIT_ID) { }
+                                ^
+
+In file included from ddm/Types.h(7),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/dart-impl/dart_types.h(149): warning #12: parsing restarts here after previous syntax error
+    dart_unit_t id;
+                  ^
+
+In file included from ddm/Types.h(7),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/dart-impl/dart_types.h(159): error: too many initializer values
+    dart_team_unit_t tmp = {unit};
+                            ^
+
+In file included from ddm/Types.h(7),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/dart-impl/dart_types.h(181): error: too many initializer values
+    dart_global_unit_t tmp = {unit};
+                              ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(37): error #303: explicit type is missing ("int" assumed)
+    friend constexpr unit_id<U, D> operator+(unit_id<U, D> lhs, unit_id<U, D> rhs);
+    ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(37): error: "constexpr" is not a function or static data member
+    friend constexpr unit_id<U, D> operator+(unit_id<U, D> lhs, unit_id<U, D> rhs);
+           ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(40): error #303: explicit type is missing ("int" assumed)
+    friend constexpr unit_id<U, D> operator-(unit_id<U, D> lhs, unit_id<U, D> rhs);
+    ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(40): error: "constexpr" is not a function or static data member
+    friend constexpr unit_id<U, D> operator-(unit_id<U, D> lhs, unit_id<U, D> rhs);
+           ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(43): error #303: explicit type is missing ("int" assumed)
+    friend constexpr bool operator==(unit_id<U, D> lhs, unit_id<U, D> rhs);
+    ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(43): error: "constexpr" is not a function or static data member
+    friend constexpr bool operator==(unit_id<U, D> lhs, unit_id<U, D> rhs);
+           ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(46): error #303: explicit type is missing ("int" assumed)
+    friend constexpr bool operator<(unit_id<U, D> lhs, unit_id<U, D> rhs);
+    ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(46): error: "constexpr" is not a function or static data member
+    friend constexpr bool operator<(unit_id<U, D> lhs, unit_id<U, D> rhs);
+           ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(49): error #303: explicit type is missing ("int" assumed)
+    friend constexpr bool operator>(unit_id<U, D> lhs, unit_id<U, D> rhs);
+    ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(49): error: "constexpr" is not a function or static data member
+    friend constexpr bool operator>(unit_id<U, D> lhs, unit_id<U, D> rhs);
+           ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(53): error #77: this declaration has no storage class or type specifier
+    constexpr explicit unit_id() noexcept
+    ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(53): error: expected a ";"
+    constexpr explicit unit_id() noexcept
+              ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(85): warning #12: parsing restarts here after previous syntax error
+    constexpr unit_id(const self_t & uid) = default;
+                                                   ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(98): error: member "ddm::unit_id<IdScope, DARTType>::constexpr" is not a type name
+    constexpr unit_id(DARTType dart_scope_uid) noexcept
+    ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(98): error: member function with the same name as its class must be a constructor
+    constexpr unit_id(DARTType dart_scope_uid) noexcept
+              ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(98): error: expected a ";"
+    constexpr unit_id(DARTType dart_scope_uid) noexcept
+                                               ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(171): warning #12: parsing restarts here after previous syntax error
+    const unit_id<IdScope, D>& operator=(const unit_id<Scope, D> & id) = delete;
+                                                                               ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(195): error: expected a ";"
+    const self_t& operator=(dart_unit_t id) noexcept {
+                                            ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(384): warning #12: parsing restarts here after previous syntax error
+  };
+  ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(396): error #77: this declaration has no storage class or type specifier
+  constexpr unit_id<IdScope, DARTType> operator+(
+  ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(396): error: "constexpr" is not a function or static data member
+  constexpr unit_id<IdScope, DARTType> operator+(
+  ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(468): warning #12: parsing restarts here after previous syntax error
+      unit_id<RHSScope, RHSDARTType> rhs) = delete;
+                                                  ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(478): error #77: this declaration has no storage class or type specifier
+  constexpr bool operator>(
+  ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(478): error: "constexpr" is not a function or static data member
+  constexpr bool operator>(
+  ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(490): error #77: this declaration has no storage class or type specifier
+  constexpr bool operator==(
+  ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(490): error: "constexpr" is not a function or static data member
+  constexpr bool operator==(
+  ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(500): error #77: this declaration has no storage class or type specifier
+  constexpr bool operator<(
+  ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(500): error: "constexpr" is not a function or static data member
+  constexpr bool operator<(
+  ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(533): warning #12: parsing restarts here after previous syntax error
+  } // namespace ddm
+  ^
+
+In file included from ddm/Types.h(8),
+                 from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/internal/Unit.h(533): error: expected a ";"
+  } // namespace ddm
+  ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(77): error: qualified name is not allowed
+    ::std::array<IndexType, NumDimensions> coords;
+    ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(77): error #77: this declaration has no storage class or type specifier
+    ::std::array<IndexType, NumDimensions> coords;
+    ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(77): error: expected a ";"
+    ::std::array<IndexType, NumDimensions> coords;
+                ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(84): error: qualified name is not allowed
+    ::std::array<SizeType, NumDimensions> sizes;
+    ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(84): error #77: this declaration has no storage class or type specifier
+    ::std::array<SizeType, NumDimensions> sizes;
+    ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(84): error: expected a ";"
+    ::std::array<SizeType, NumDimensions> sizes;
+                ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(93): error #303: explicit type is missing ("int" assumed)
+    static constexpr const dart_datatype_t value = DART_TYPE_UNDEFINED;
+           ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(93): error: expected a ";"
+    static constexpr const dart_datatype_t value = DART_TYPE_UNDEFINED;
+                     ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(98): error #303: explicit type is missing ("int" assumed)
+    static constexpr const dart_datatype_t value = DART_TYPE_BYTE;
+           ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(98): error: expected a ";"
+    static constexpr const dart_datatype_t value = DART_TYPE_BYTE;
+                     ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(103): error #303: explicit type is missing ("int" assumed)
+    static constexpr const dart_datatype_t value = DART_TYPE_BYTE;
+           ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(103): error: expected a ";"
+    static constexpr const dart_datatype_t value = DART_TYPE_BYTE;
+                     ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(108): error #303: explicit type is missing ("int" assumed)
+    static constexpr const dart_datatype_t value = DART_TYPE_INT;
+           ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(108): error: expected a ";"
+    static constexpr const dart_datatype_t value = DART_TYPE_INT;
+                     ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(113): error #303: explicit type is missing ("int" assumed)
+    static constexpr const dart_datatype_t value = DART_TYPE_UINT;
+           ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(113): error: expected a ";"
+    static constexpr const dart_datatype_t value = DART_TYPE_UINT;
+                     ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(118): error #303: explicit type is missing ("int" assumed)
+    static constexpr const dart_datatype_t value = DART_TYPE_FLOAT;
+           ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(118): error: expected a ";"
+    static constexpr const dart_datatype_t value = DART_TYPE_FLOAT;
+                     ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(123): error #303: explicit type is missing ("int" assumed)
+    static constexpr const dart_datatype_t value = DART_TYPE_LONG;
+           ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(123): error: expected a ";"
+    static constexpr const dart_datatype_t value = DART_TYPE_LONG;
+                     ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(128): error #303: explicit type is missing ("int" assumed)
+    static constexpr const dart_datatype_t value = DART_TYPE_ULONG;
+           ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(128): error: expected a ";"
+    static constexpr const dart_datatype_t value = DART_TYPE_ULONG;
+                     ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(133): error #303: explicit type is missing ("int" assumed)
+    static constexpr const dart_datatype_t value = DART_TYPE_DOUBLE;
+           ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(133): error: expected a ";"
+    static constexpr const dart_datatype_t value = DART_TYPE_DOUBLE;
+                     ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(180): error: identifier "constexpr" is undefined
+  constexpr team_unit_t    UNDEFINED_TEAM_UNIT_ID{DART_UNDEFINED_UNIT_ID};
+  ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(180): error: "team_unit_t" has already been declared in the current scope
+  constexpr team_unit_t    UNDEFINED_TEAM_UNIT_ID{DART_UNDEFINED_UNIT_ID};
+            ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(180): error: expected a ";"
+  constexpr team_unit_t    UNDEFINED_TEAM_UNIT_ID{DART_UNDEFINED_UNIT_ID};
+                           ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(187): error: identifier "constexpr" is undefined
+  constexpr global_unit_t UNDEFINED_GLOBAL_UNIT_ID{DART_UNDEFINED_UNIT_ID};
+  ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(187): error: "global_unit_t" has already been declared in the current scope
+  constexpr global_unit_t UNDEFINED_GLOBAL_UNIT_ID{DART_UNDEFINED_UNIT_ID};
+            ^
+
+In file included from ddm/DDM.h(19),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Types.h(187): error: expected a ";"
+  constexpr global_unit_t UNDEFINED_GLOBAL_UNIT_ID{DART_UNDEFINED_UNIT_ID};
+                          ^
+
+In file included from ddm/dart-impl/dart.h(167),
+                 from ddm/Init.h(4),
+                 from ddm/DDM.h(20),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/dart-impl/dart_globmem.h(213): error: class "dart_local_unit" has no member "id"
+    gptr->unitid = unit.id;
+                        ^
+
+In file included from ddm/DDM.h(20),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/Init.h(67): error: variable "ddm::global_unit_t" is not a type name
+    global_unit_t    myid();
+    ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(88): error #77: this declaration has no storage class or type specifier
+  constexpr auto begin(const RangeType & range)
+  ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(88): error: "constexpr" is not a function or static data member
+  constexpr auto begin(const RangeType & range)
+  ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(163): warning #12: parsing restarts here after previous syntax error
+    static yes has_begin(C *);
+                             ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(165): error: identifier "yes" is undefined
+    static yes has_begin(C *);
+           ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(166): error: identifier "no" is undefined
+    static no  has_begin(...);
+           ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(171): error: identifier "yes" is undefined
+    static yes has_end(C *);
+           ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(173): error: identifier "yes" is undefined
+    static yes has_end(C *);
+           ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(174): error: identifier "no" is undefined
+    static no  has_end(...);
+           ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(176): error: expected a declaration
+  public:
+  ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(180): warning #12: parsing restarts here after previous syntax error
+           ) };
+              ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(183): error: expected a declaration
+  } // namespace detail
+  ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(228): warning #12: parsing restarts here after previous syntax error
+  struct is_range : ddm::detail::_is_range_type<RangeType> { };
+                                                              ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(255): error: a template argument list is not allowed in a declaration of a primary template
+  struct view_traits<ddm::IteratorRange<IteratorT, SentinelT> > {
+         ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(308): error: namespace "std" has no member "conditional"
+              std::conditional<
+                   ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(308): error: expected an identifier
+              std::conditional<
+                              ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(310): warning #1569: class member typedef may not be redeclared
+                iterator,
+                ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(311): error: expected an identifier
+                typename iterator::local_type
+                ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(316): error: namespace "std" has no member "conditional"
+              std::conditional<
+                   ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(316): error: expected an identifier
+              std::conditional<
+                              ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(318): warning #1569: class member typedef may not be redeclared
+                iterator,
+                ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(319): error: expected an identifier
+                typename sentinel::local_type
+                ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(323): error: identifier "local_iterator" is undefined
+    typedef IteratorRange<local_iterator, local_sentinel>       local_type;
+                          ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(323): error: identifier "local_sentinel" is undefined
+    typedef IteratorRange<local_iterator, local_sentinel>       local_type;
+                                          ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(328): error: not a valid member class or function template declaration
+    constexpr explicit IteratorRange(Container && c)
+    ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(328): error: expected a ";"
+    constexpr explicit IteratorRange(Container && c)
+              ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(357): warning #12: parsing restarts here after previous syntax error
+  };
+  ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(392): error: not a valid member class or function template declaration
+    constexpr explicit IteratorRange(Container && c)
+    ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(392): error: expected a ";"
+    constexpr explicit IteratorRange(Container && c)
+              ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(412): warning #12: parsing restarts here after previous syntax error
+  };
+  ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(419): error #77: this declaration has no storage class or type specifier
+  constexpr ddm::IteratorRange<const Iterator, const Sentinel>
+  ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(419): error: "constexpr" is not a function or static data member
+  constexpr ddm::IteratorRange<const Iterator, const Sentinel>
+  ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(448): warning #12: parsing restarts here after previous syntax error
+  } // namespace ddm
+  ^
+
+In file included from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(9),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+ddm/../ddm/../ddm/internal/../../ddm/internal/../../ddm/Range.h(448): error: expected a ";"
+  } // namespace ddm
+  ^
+
+In file included from /software/gcc/5.3.0/include/c++/5.3.0/vector(62),
+                 from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(12),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+/software/gcc/5.3.0/include/c++/5.3.0/bits/stl_construct.h(108): error: _Destroy_aux is not a template
+      struct _Destroy_aux<true>
+             ^
+
+In file included from /software/gcc/5.3.0/include/c++/5.3.0/vector(62),
+                 from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(12),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+/software/gcc/5.3.0/include/c++/5.3.0/bits/stl_construct.h(149): error: allocator is not a template
+           allocator<_Tp>&)
+           ^
+
+In file included from /software/gcc/5.3.0/include/c++/5.3.0/vector(62),
+                 from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(12),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+/software/gcc/5.3.0/include/c++/5.3.0/bits/stl_construct.h(155): error: expected a declaration
+  } // namespace std
+  ^
+
+In file included from /software/gcc/5.3.0/include/c++/5.3.0/vector(63),
+                 from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(12),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+/software/gcc/5.3.0/include/c++/5.3.0/bits/stl_uninitialized.h(87): error: __uninitialized_copy is not a template
+      struct __uninitialized_copy<true>
+             ^
+
+In file included from /software/gcc/5.3.0/include/c++/5.3.0/vector(63),
+                 from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(12),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+/software/gcc/5.3.0/include/c++/5.3.0/bits/stl_uninitialized.h(280): error: allocator is not a template
+                 _ForwardIterator __result, allocator<_Tp>&)
+                                            ^
+
+In file included from /software/gcc/5.3.0/include/c++/5.3.0/vector(63),
+                 from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(12),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+/software/gcc/5.3.0/include/c++/5.3.0/bits/stl_uninitialized.h(329): error: allocator is not a template
+                 const _Tp& __x, allocator<_Tp2>&)
+                                 ^
+
+In file included from /software/gcc/5.3.0/include/c++/5.3.0/vector(63),
+                 from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(12),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+/software/gcc/5.3.0/include/c++/5.3.0/bits/stl_uninitialized.h(357): error: allocator is not a template
+                   const _Tp& __x, allocator<_Tp2>&)
+                                   ^
+
+In file included from /software/gcc/5.3.0/include/c++/5.3.0/vector(63),
+                 from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(12),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+/software/gcc/5.3.0/include/c++/5.3.0/bits/stl_uninitialized.h(686): error: expected a declaration
+  } // namespace
+  ^
+
+In file included from /software/gcc/5.3.0/include/c++/5.3.0/vector(64),
+                 from ddm/../ddm/../ddm/internal/../../ddm/internal/StreamConversion.h(12),
+                 from ddm/../ddm/../ddm/internal/Logging.h(5),
+                 from ddm/../ddm/Exception.h(12),
+                 from ddm/Team.h(8),
+                 from ddm/DDM.h(21),
+                 from dplt.h(5),
+                 from dplt.cpp(1):
+/software/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(109): error: expected a declaration
+      public:
+      ^
+
+compilation aborted for dplt.cpp (code 4)
+make: *** [dplt] Error 4

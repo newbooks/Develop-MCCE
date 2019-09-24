@@ -72,5 +72,4 @@ RADIUS,  ASN01,  "HD22": 1.000,   1.000,   0.020
 CONFORMER, ASN01: Em0=   0.0, pKa0=  0.00, ne= 0, nH= 0, rxn02= -7.340, rxn04= -3.5, rxn08= -1.64
 
 # Rotatable bonds. The atoms extended in the bond direction will all be rotated.
-ROTATE, ASN: " CA " - " CB "
-ROTATE, ASN: " CB " - " CG "
+ROTATE, ASN: " CA " - " CB ", " CB " - " CG "

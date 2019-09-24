@@ -86,9 +86,9 @@ class Env:
             keys = tuple(keys)
 
             value_string = fields[1].strip()
-            if keys in self.tpl:
+            if keys in self.tpl:   # Overwrite
                 logging.warning("   Value of \"%s\": (%s) is replaced by (%s)" % (",".join(keys), self.tpl[keys],
-                                                                                  value_string))
+                                                                                   value_string))
             self.tpl[keys] = value_string
 
             # Make an atom list in the natural order of CONNECT record.

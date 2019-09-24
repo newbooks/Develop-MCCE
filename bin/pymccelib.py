@@ -22,6 +22,7 @@ class Env:
         self.prm = {}
         self.tpl = {}
         self.atomnames = {}  # atom names indexed by conformer name
+        self.confnames = {}  # conformer names indexed by residue name
         return
 
     def init(self):
@@ -86,17 +87,16 @@ class Env:
 
             value_string = fields[1].strip()
             if keys in self.tpl:
-                if value_string == "!!!":
-                # Special rule to negate a key, it is used by the last loaded ftpl file
-                # to overwrite values that might have been defined before.
-                    del self.tpl[keys]
-                else:
-                    self.tpl[keys] = self.tpl[keys] + " , " + value_string
-            else:
-                self.tpl[keys] = value_string
+                logging.warning("   Value of \"%s\": (%s) is replaced by (%s)" % (",".join(keys), self.tpl[keys],
+                                                                                  value_string))
+            self.tpl[keys] = value_string
 
             # Make an atom list in the natural order of CONNECT record.
-            if keys[0] == "CONNECT":
+            if keys[0] == "CONFLIST":
+                res = keys[1]
+                self.confnames[res] = [x.strip() for x in self.tpl[keys].split(",")]
+
+            elif keys[0] == "CONNECT":
                 atom = keys[1]
                 conf = keys[2]
                 if conf in self.atomnames:
@@ -175,11 +175,13 @@ class Env:
 
         for residue in residues:
             # CONFLIST
-            key = ("CONFLIST", residue)
-            value = ["%5s" % x.strip() for x in self.tpl[key].split(",")]
+            conformers = self.confnames[residue]
+            value = ["%5s" % x.strip() for x in conformers]
             lines.append("CONFLIST %s        %s\n\n" % (residue, " ".join(value)))
 
-            # NATOM
+            for conf in self.confnames[residue]:
+                # NATOM
+                print(self.atomnames[conf])
 
             # IATOM
 

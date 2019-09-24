@@ -231,6 +231,7 @@ Derived entries are converted or structured entries derived from native entries.
 | Name | Example | Explanation |
 | --- | --- | --- |
 |env.atomenames{}| env.atomnames["GLUBK"] | atom names derived from CONNECT records|
+|env.confnames{} | env.confnames["GLU"] | conformer names of a residue |
 
 !!! Note
     Derived entries are stored in separate env attributes.

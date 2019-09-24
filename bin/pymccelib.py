@@ -95,6 +95,9 @@ class Env:
             if keys[0] == "CONFLIST":
                 res = keys[1]
                 self.confnames[res] = [x.strip() for x in self.tpl[keys].split(",")]
+                for conf in self.confnames[res]:
+                    if conf not in self.atomnames:
+                        self.atomnames[conf] = []
 
             elif keys[0] == "CONNECT":
                 atom = keys[1]
@@ -181,7 +184,9 @@ class Env:
 
             for conf in self.confnames[residue]:
                 # NATOM
-                print(self.atomnames[conf])
+                line = "NATOM    %5s      %d\n" % (conf, len(self.atomnames[conf]))
+                lines.append(line)
+            lines.append("\n")
 
             # IATOM
 

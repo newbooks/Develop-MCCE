@@ -5,6 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
+*.o
 
 # Distribution / packaging
 .Python
@@ -116,3 +117,4 @@ testcase_1A2P/microstates_5
 testcase_1A2P/microstates
 
 site
+mcce.tpl

@@ -189,7 +189,12 @@ class Env:
             lines.append("\n")
 
             # IATOM
-
+            for conf in self.confnames[residue]:
+                atoms = self.atomnames[conf]
+                iatom = 0
+                for atom in atoms:
+                    iatom += 1
+                    
             # ATOMNAME
 
             # PROTON

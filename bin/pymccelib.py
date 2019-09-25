@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
+import sys
 import logging
 import os
 import glob
+
 
 ROOMT = 298.15
 PH2KCAL = 1.364
@@ -193,9 +195,45 @@ class Env:
                 atoms = self.atomnames[conf]
                 iatom = 0
                 for atom in atoms:
+                    line = "IATOM    %5s %4s %d\n" % (conf, atom, iatom)
+                    lines.append(line)
                     iatom += 1
-                    
+
+            lines.append("\n")
+
             # ATOMNAME
+            for conf in self.confnames[residue]:
+                atoms = self.atomnames[conf]
+                iatom = 0
+                for atom in atoms:
+                    line = "ATOMNAME %5s %4d %4s\n" % (conf, iatom, atom)
+                    lines.append(line)
+                    iatom += 1
+
+            lines.append("\n")
+
+            # conformer info
+            for conf in self.confnames[residue]:
+                if conf[-2:] == "BK":
+                    continue
+                key = ("CONFORMER", conf)
+                if key in self.tpl:
+                    value_str = self.tpl[key]
+                    fields = value_str.split(",")
+                    for field in fields:
+                        skey, svalue = field.split("=")
+                        if skey == "Em0":
+                            Em0 = float(svalue)
+
+
+                else:
+                    logging.warning("   No CONFORMER for %s in ftpl file. pKa, ne, nH and RXN are set to be 0." %
+                                    conf)
+                    Em0 = 0.0
+                    pKa = 0.0
+                    ne = 0
+                    nH = 0
+                    rxn = 0.0
 
             # PROTON
 
@@ -206,6 +244,8 @@ class Env:
             # EM
 
             # RXN
+
+
 
             # CONNECT
 

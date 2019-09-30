@@ -21,6 +21,7 @@ f        step 4: monte carlo sampling                       (DO_MONTE)
 ==============================================================================
 Less modified entries
 ------------------------------------------------------------------------------
+4        integer, Protein dielectric constant for DelPhi    (EPSILON_PROT)
 DEFAULT  tpl file folder path, "DEFAULT" to launch location (TPL_FOLDER)
 ./extra.ftpl                                                (EXTRA)
 

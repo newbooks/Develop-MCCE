@@ -169,7 +169,8 @@ class Env:
 
     def ftpl2tpl(self, fname):
         """Convert env.tpl to mcce tpl file"""
-
+        epsilon = int(float(self.prm["EPSILON_PROT"]))
+        rxn_index = "rxn%02d" % epsilon
         # Get a list of residues
         residues = []
         lines = []
@@ -213,6 +214,11 @@ class Env:
             lines.append("\n")
 
             # conformer info
+            proton_lines = []
+            pka_lines = []
+            electron_lines = []
+            em_lines = []
+            rxn_lines = []
             for conf in self.confnames[residue]:
                 if conf[-2:] == "BK":
                     continue
@@ -222,32 +228,48 @@ class Env:
                     fields = value_str.split(",")
                     for field in fields:
                         skey, svalue = field.split("=")
+                        skey = skey.strip()
+                        svalue = svalue.strip()
                         if skey == "Em0":
                             Em0 = float(svalue)
+                        elif skey == "pKa0":
+                            pKa = float(svalue)
+                        elif skey == "ne":
+                            ne = int(svalue)
+                        elif skey == "nH":
+                            nH = int(svalue)
+                        elif skey == rxn_index:
+                            rxn = float(svalue)
 
+                    # PROTON
+                    proton_lines.append("PROTON   %5s      %d\n" % (conf, nH))
 
-                else:
-                    logging.warning("   No CONFORMER for %s in ftpl file. pKa, ne, nH and RXN are set to be 0." %
-                                    conf)
-                    Em0 = 0.0
-                    pKa = 0.0
-                    ne = 0
-                    nH = 0
-                    rxn = 0.0
+                    # PKA
+                    pka_lines.append("PKA      %5s      %.3f\n" % (conf, pKa))
 
-            # PROTON
+                    # ELECTRON
+                    electron_lines.append("ELECTRON %5s      %d\n" % (conf, ne))
 
-            # PKA
+                    # EM
+                    em_lines.append("EM       %5s      %.1f\n" % (conf, Em0))
 
-            # ELECTRON
+                    # RXN
+                    rxn_lines.append("RXN      %5s      %.3f\n" % (conf, rxn))
 
-            # EM
-
-            # RXN
-
+            lines += proton_lines
+            lines += pka_lines
+            lines += electron_lines
+            lines += em_lines
+            lines += rxn_lines
+            lines.append("\n")
 
 
             # CONNECT
+            for conf in self.confnames:
+                for atom in self.atomnames[conf]:
+                    svalue = self.tpl[("CONNECT", conf, atom)]
+                    print(svalue)
+
 
             # RADIUS
 

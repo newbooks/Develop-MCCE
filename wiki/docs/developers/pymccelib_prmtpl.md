@@ -85,7 +85,7 @@ and line
 ```
 translates to:
 ```
-env.prm[TITR_PHD] = "1.0"
+env.prm["TITR_PHD"] = "1.0"
 ```
 ---
 

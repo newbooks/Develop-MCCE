@@ -39,6 +39,12 @@ class Env:
         if "EXTRA" in self.prm and os.path.isfile(self.prm["EXTRA"]):
             self.load_ftpl(self.prm["EXTRA"])
 
+        # revise self.atomnames to include empty conformer types
+        for res_conflist in [x for x in self.tpl.keys() if x[0] == "CONFLIST"]:
+            for conf in [x.strip() for x in self.tpl[res_conflist].strip().split(",")]:
+                if conf not in self.atomnames:
+                    self.atomnames[conf] = []
+
         logging.info("Step 0. Done.\n")
         return
 
@@ -158,14 +164,29 @@ class Env:
         os.chdir(cwd)
         return
 
-
 class Atom:
     def __init__(self):
-        self.atomname = ""
+        self.name = ""
         self.confname = ""
         self.resname = ""
         self.on = False
         self.iatom = "0"
+        self.chainid = ""
+        self.seqnum = 0
+        self.icode = ""
+        self.xyz=()
+        self.resid = ()
+        return
+
+    def load_nativeline(self, line):
+        self.name = line[12:16]
+        self.resname = line[17:20]
+        self.chainid = line[21]
+        self.seqnum = int(line[22:26])
+        self.icode = line[26]
+        self.xyz = (float(line[30:38]), float(line[38:46]),float(line[46:54]))
+
+        self.resid = (self.resname, self.chainid, self.seqnum, self.icode)
         return
 
 class Conformer:
@@ -173,11 +194,13 @@ class Conformer:
         self.confname = ""
         self.resname = ""
         self.atoms = []
+        self.resid = ()
         return
 
 class Residue:
-    def __init__(self):
-        self.resname = []
+    def __init__(self, resid):
+        self.resid = resid
+        self.resname = resid[0]
         self.conformers = []
         return
 
@@ -188,69 +211,71 @@ class Protein:
         return
 
 
-    def pdb2mcce(self, pdb):
-        """Convert pdb to mcce pdb"""
-        atom_exceptions = [" H2 ", " OXT", " HXT"]
-        mccelines = []
+    def load_nativepdb(self, pdb):
+        """Load native pdb file."""
+
         lines = [x for x in open(pdb).readlines() if x[:6] == "ATOM  " or x[:6] == "HETATM"]
 
-        icount = 0
-        previous_resid = ()
-        possible_confs = []
+        resids = []
         for line in lines:
             # pdb line
-            atomname = line[12:16]
-            resname = line[17:20]
-            chainid = line[21]
-            seqnum = int(line[22:26])
-            icode = line[26]
-            xyz = line[30:54]
+            atom = Atom()
+            atom.load_nativeline(line)
 
-            if resname == "PRO" and atomname == " H  ":   # Proline H atom exception
-                continue
-
-            current_resid = (resname, chainid, seqnum, icode)
             # mcce line, need to add conf_number, radius, charge, conf_type, conf_history
-            if current_resid != previous_resid:
-                possible_confs = [x.strip() for x in env.tpl[("CONFLIST", resname)].split(",")]
-                logging.info("Identified a new residue %s: %s" % (resname, ", ".join(possible_confs)))
-                previous_resid = current_resid
-            Found = False
-            for confname in possible_confs:
-                if atomname in env.atomnames[confname]:
-                    conf_type = confname[3:5]
-                    conf_number = possible_confs.index(confname)
-                    cname = confname
-                    Found = True
-                    break
-            if not Found:
-                # this atom is not found in all conformers
-                if atomname not in atom_exceptions:
-                    print("Atom \"%s\" in pdb file %s can not be assigned to any conformer" % (atomname, pdb))
-                continue
+            try:
+                ires = resids.index(atom.resid)
+            except ValueError:  # new residue
+                self.residues.append(Residue(atom.resid))
+                resids.append(atom.resid)
+                ires = len(self.residues) - 1
+                self.residues[ires].conformers=[Conformer()]   # set up conformer 0
+            # load atoms into conformer 0
+            self.residues[ires].conformers[0].atoms.append(atom)
 
-            key = ("RADIUS", cname, atomname)
-            if key in env.tpl:
-                radius_str = env.tpl[key]
-                rad, _, _ = radius_str.split(",")
-                rad = float(rad)
-            else:
-                rad = 0.0
+        # separate side chain atoms from backbone - BK atoms remain in conformer 0, the rest go to conformer 1
+        for res in self.residues:
+            conflist = [x.strip() for x in env.tpl[("CONFLIST", res.resname)].strip().split(",")]
+            if res.conformers:
+                for atom in res.conformers[0].atoms:
+                    # find the first conformer type this atom fits
+                    for conftype in conflist:
+                        if atom.name in env.atomnames[conftype]:
+                            if conftype[-2:] == "BK":  # stays in this conformer, break search conf, next atom
+                                break
+                            else:
+                                if len(res.conformers) > 1:
+                                    res.conformers[1].atoms.append(atom)
+                                else:
+                                    res.conformers.append(Conformer())
+                                    res.conformers[1].confname = conftype
+                                    res.conformers[1].resname = res.resname
+                                    res.conformers[1].atoms.append(atom)
 
-            key = ("CHARGE", cname, atomname)
-            if key in env.tpl:
-                charge_str = env.tpl[key]
-                crg = float(charge_str)
-            else:
-                crg = 0.0
+        # delete atoms don't belong to conformer 1
+        for res in self.residues:
+            if len(res.conformers) > 1:
+                confname = res.conformers[1].confname
+                valid_atoms = env.atomnames[confname]
+                for atom in res.conformers[1].atoms:
+                    if atom.name not in valid_atoms:
+                        logging.WARNING("   Deleted atom \"%s\" of %s because it doesn't fit into initial conformer." % (
+                            atom.name, res.resname))
 
-            conf_history = "________"
-            newline = "ATOM  %5d %4s %s %c%4d%c%03d%s%8.3f    %8.3f      %s%s\n" % \
-                      (icount, atomname, resname, chainid, seqnum, icode, conf_number, xyz, rad, crg, conf_type, conf_history)
-            mccelines.append(newline)
-            icount += 1
+        return
 
-        return mccelines
+    def pdblines(self):
+        lines = []
+        icount = 1
+        for res in self.residues:
+            conflist = env.tpl[("CONFLIST", res.resname)]
+            logging.debug(conflist)
+            for conf in res.conformers:
+                for atom in conf.atoms:
+                    line = "ATOM  %5d %4s %3s %c\n" % (icount, atom.name, atom.resname, atom.chainid)
+                    lines.append(line)
+                    icount += 1
+        return lines
 
 
 env = Env()

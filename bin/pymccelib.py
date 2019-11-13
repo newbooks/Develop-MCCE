@@ -397,9 +397,9 @@ class Protein:
                             break
 
 
-            for res in self.residues:
-                if res.flag:
-                    print("%s, %s" % (res.flag, res.resid))
+        for res in self.residues:
+            if res.flag:
+                print("%s, %s" % (res.flag, res.resid))
 
         return True
 

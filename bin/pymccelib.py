@@ -3,11 +3,17 @@
 import logging
 import os
 import glob
+from geometry import *
 
 ROOMT = 298.15
 PH2KCAL = 1.364
 KCAL2KT = 1.688
 KJ2KCAL = 0.239
+DEFAULT_RAD = 1.5  # for dielectric boundary
+AMINO_ACIDS = ["ALA", "ARG", "ASN", "ASP", "CYS", "CYL", "GLN", "GLY", "GLU", "HIS", "HIL", "ILE", "LEU", "LYS",
+               "MET", "PHE", "PRO", "THR", "TRP", "TYR", "VAL"]
+
+
 
 class Env:
     def __init__(self):
@@ -15,7 +21,9 @@ class Env:
         self.runprm = "run.prm"
         self.version = "PyMCCE 1.0"
         self.fn_conflist1 = "head1.lst"
+        self.fn_step1_out = "step1_out.pdb"
         self.fn_conflist2 = "head2.lst"
+        self.fn_step2_out = "step2_out.pdb"
         self.fn_conflist3 = "head3.lst"
         self.energy_dir = "energies"
         self.ftpldir = ""
@@ -166,6 +174,8 @@ class Env:
 
 class Atom:
     def __init__(self):
+        self.icount = 0
+        self.iconf = 0
         self.name = ""
         self.confname = ""
         self.resname = ""
@@ -173,9 +183,12 @@ class Atom:
         self.iatom = "0"
         self.chainid = ""
         self.seqnum = 0
-        self.icode = ""
+        self.icode = "_"
         self.xyz=()
         self.resid = ()
+        self.crg = 0.0
+        self.rad = DEFAULT_RAD
+        self.history = "__________"
         return
 
     def load_nativeline(self, line):
@@ -183,11 +196,21 @@ class Atom:
         self.resname = line[17:20]
         self.chainid = line[21]
         self.seqnum = int(line[22:26])
-        self.icode = line[26]
+        if line[26] != " ":
+            self.icode = line[26]
         self.xyz = (float(line[30:38]), float(line[38:46]),float(line[46:54]))
 
         self.resid = (self.resname, self.chainid, self.seqnum, self.icode)
         return
+
+    def printme(self):
+        line = "ATOM  %5d %4s %3s %c%04d%c%03d%8.3f%8.3f%8.3f%8.3f    %8.3f      %s\n" % (self.icount, self.name,
+                                                                             self.resname,
+                                                                     self.chainid,
+                                                 self.seqnum, self.icode, self.iconf, self.xyz[0],
+                                                 self.xyz[1], self.xyz[2], self.rad, self.crg, self.history)
+
+        return line
 
 class Conformer:
     def __init__(self):
@@ -195,13 +218,15 @@ class Conformer:
         self.resname = ""
         self.atoms = []
         self.resid = ()
+        self.history = "__________"
         return
 
 class Residue:
     def __init__(self, resid):
         self.resid = resid
-        self.resname = resid[0]
+        self.resname, self.chainid, self.seqnum, self.icode = resid
         self.conformers = []
+        self.flag = ""    # flag for ntr, ctr label or other purpose
         return
 
 class Protein:
@@ -229,7 +254,10 @@ class Protein:
                 self.residues.append(Residue(atom.resid))
                 resids.append(atom.resid)
                 ires = len(self.residues) - 1
-                self.residues[ires].conformers=[Conformer()]   # set up conformer 0
+                conf = Conformer()
+                conf.history  = "BK________"
+                self.residues[ires].conformers=[conf]   # set up conformer 0
+
             # load atoms into conformer 0
             self.residues[ires].conformers[0].atoms.append(atom)
 
@@ -247,10 +275,14 @@ class Protein:
                                 if len(res.conformers) > 1:
                                     res.conformers[1].atoms.append(atom)
                                 else:
-                                    res.conformers.append(Conformer())
+                                    conf = Conformer()
+                                    conf.history="%2s________" % (conftype[-2:])  # last two characters
+                                    res.conformers.append(conf)
                                     res.conformers[1].confname = conftype
                                     res.conformers[1].resname = res.resname
                                     res.conformers[1].atoms.append(atom)
+                                res.conformers[0].atoms.remove(atom)
+                                break  # do not search other conformers
 
         # delete atoms don't belong to conformer 1
         for res in self.residues:
@@ -261,6 +293,7 @@ class Protein:
                     if atom.name not in valid_atoms:
                         logging.WARNING("   Deleted atom \"%s\" of %s because it doesn't fit into initial conformer." % (
                             atom.name, res.resname))
+                        res.conformers[1].atoms.remove(atom)
 
         return
 
@@ -269,13 +302,106 @@ class Protein:
         icount = 1
         for res in self.residues:
             conflist = env.tpl[("CONFLIST", res.resname)]
-            logging.debug(conflist)
+            #logging.debug(conflist)
+            iconf = 0
             for conf in res.conformers:
                 for atom in conf.atoms:
-                    line = "ATOM  %5d %4s %3s %c\n" % (icount, atom.name, atom.resname, atom.chainid)
+                    atom.icount = icount
+                    atom.iconf = iconf
+                    atom.history = conf.history
+                    line = atom.printme()
                     lines.append(line)
                     icount += 1
+                iconf += 1
         return lines
+
+    def identify_nc(self):
+        # The first and last amino acid in a chain, and no extra bonded atom from other residues in the same chain
+        clash_distance = float(env.prm["CLASH_DISTANCE"])
+        clash_distance2 = clash_distance * clash_distance
+
+        chains = []
+        # count chains
+        for res in self.residues:
+            if res.chainid not in chains:
+                chains.append(res.chainid)
+
+        for chainid in chains:
+            # get all residues of this chain
+            aminoacids_in_chain = []
+            others_in_chain = []
+            for res in self.residues:
+                if res.chainid == chainid:
+                    if res.resname in AMINO_ACIDS:
+                        aminoacids_in_chain.append(res)
+                    else:
+                        others_in_chain.append(res)
+            if aminoacids_in_chain:
+                ntr = aminoacids_in_chain[0]
+                ctr = aminoacids_in_chain[0]
+            else:
+                continue
+
+            for res in aminoacids_in_chain[1:]:
+                if res.seqnum < ntr.seqnum:
+                    ntr = res
+                elif res.seqnum > ctr.seqnum:
+                    ctr = res
+
+            # verify bond for NTR
+            atom_N =""
+            for atom in ntr.conformers[0].atoms:
+                if atom.name == " N  ":
+                    atom_N = atom
+                    break
+
+            if not atom_N:
+                logging.critical("No N atom found for NTR residue")
+                return False
+
+            ntr.flag = "ntr"
+            for res in others_in_chain:
+                if not ntr.flag:
+                    break
+                for conf in res.conformers:
+                    if not ntr.flag:
+                        break
+                    for atom2 in conf.atoms:
+                        d2 = d2vv(atom2.xyz, atom_N.xyz)
+                        if d2 < clash_distance2:
+                            ntr.flag = ""
+                            break
+
+            # verify bond for CTR
+            atom_C =""
+            for atom in ntr.conformers[0].atoms:
+                if atom.name == " C  ":
+                    atom_C = atom
+                    break
+
+            if not atom_C:
+                logging.critical("No C atom found for CTR residue")
+                return False
+
+            ctr.flag = "ctr"
+            for res in others_in_chain:
+                if not ctr.flag:
+                    break
+                for conf in res.conformers:
+                    if not ctr.flag:
+                        break
+                    for atom2 in conf.atoms:
+                        d2 = d2vv(atom2.xyz, atom_C.xyz)
+                        if d2 < clash_distance2:
+                            ctr.flag = ""
+                            break
+
+
+            for res in self.residues:
+                if res.flag:
+                    print("%s, %s" % (res.flag, res.resid))
+
+        return True
 
 
 env = Env()

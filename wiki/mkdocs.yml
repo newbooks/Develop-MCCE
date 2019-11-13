@@ -17,6 +17,7 @@ nav:
         - Pymccelib:
             - Reading Parameters: developers/pymccelib_prmtpl.md
             - PDB IO: developers/pymccelib_pdb.md
+            - Structure modification: developers/pymccelib_structure.md
         - Writing Documentation: developers/mkdocs.md
 
 #theme: readthedocs

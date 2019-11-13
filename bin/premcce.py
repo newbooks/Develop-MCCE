@@ -10,5 +10,16 @@ if __name__ == "__main__":
     env.init()
     prot = Protein()
     prot.load_nativepdb(env.prm["INPDB"])
+
+    # identify N and C terminal
+    if env.prm["TERMINALS"].upper() == "T":
+        prot.identify_nc()
+
+    # remove exposed water
+
+    # Disulfide bridge
+
+
+
     lines = prot.pdblines()
-    sys.stdout.writelines(lines)
+    open(env.fn_step1_out,"w").writelines(lines)

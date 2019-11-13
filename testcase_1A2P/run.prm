@@ -37,6 +37,13 @@ ph       "ph" for pH titration, "eh" for eh titration       (TITR_TYPE)
 #############################################################################
 MODIFYING FOLLOWING ENTRIES REQUIRE ADVANCED KNOWLEDGE:
 -----------------------------------------------------------------------------
+step 1:
+t        Label terminal residues?                           (TERMINALS)
+2.0      distance limit of reporting clashes                (CLASH_DISTANCE)
+0.05     cut off water if % SAS exceeds this number         (H2O_SASCUTOFF)
+
+step 3:
+DEFAULT  DelPhi executable                                  (DELPHI_EXE)
 
 step 4:
 5.0      Big pairwise threshold to make big list            (BIG_PAIRWISE)
@@ -45,5 +52,11 @@ step 4:
 2000     Sampling = n_iter * confs                          (MONTE_NITER)
 6        Independent monte carlo sampling                   (MONTE_RUNS)
 1000000  Maximum microstates for analytical solution        (NSTATE_MAX)
+1.0      Scaling factor of intra-conformer VDW              (SCALING_VDW0)
+1.0      Scaling factor of sidechain to backbone VDW        (SCALING_VDW1)
+1.0      Scaling factor of sidechain to sidechain VDW       (SCALING_VDW)
+1.0      Scaling factor of torsion energy                   (SCALING_TORS)
+1.0      Scaling factor of electrostatic interaction        (SCALING_ELE)
+1.0      Scaling factor of desolvation energy               (SCALING_DSOLV)
 ##############################################################################
 

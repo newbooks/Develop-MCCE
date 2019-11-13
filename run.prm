@@ -37,6 +37,11 @@ ph       "ph" for pH titration, "eh" for eh titration       (TITR_TYPE)
 #############################################################################
 MODIFYING FOLLOWING ENTRIES REQUIRE ADVANCED KNOWLEDGE:
 -----------------------------------------------------------------------------
+step 1:
+t        Label terminal residues?                           (TERMINALS)
+2.0      distance limit of reporting clashes                (CLASH_DISTANCE)
+0.05     cut off water if % SAS exceeds this number         (H2O_SASCUTOFF)
+
 step 3:
 DEFAULT  DelPhi executable                                  (DELPHI_EXE)
 

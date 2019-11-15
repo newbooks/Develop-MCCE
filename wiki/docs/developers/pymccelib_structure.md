@@ -30,27 +30,8 @@ This subroutine does:
 The criteria for determining a N or C residue are *
 
   * a residue is an amino acid
-  * sequence number is lowest or highest on the amino acid chain
-  * For N terminus, N atom is not within bond distance of any atoms from other residues
-  * For C terminus, O atom is not within bond distance of any atoms from other residues
+  * sequence number is lowest or highest among the amino acids in a chain
+  * For N terminus, N atom is not within bond distance of any atoms from other residues of the chain
+  * For C terminus, O atom is not within bond distance of any atoms from other residues of the chain
 
----
-### Read a MCCE pdb file
 
----
-### Write a pdb file
-*Write mcce protein data structure to array of lines ready to output to stdout or file.*
-
-**Example:**
-```
-prot=Protein()
-...
-lines = prot.pdblines()
-sys.stdout.writelines(lines)
-```
-
-**Description:**
-
-This subroutine does:
-
-  * Read pdb file in native format (PDB format) and store in mcce protein hierarchical structure.

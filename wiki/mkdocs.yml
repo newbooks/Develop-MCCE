@@ -16,6 +16,9 @@ nav:
         - Program Structure: developers/structure.md
         - Pymccelib:
             - Reading Parameters: developers/pymccelib_prmtpl.md
+            - PDB IO: developers/pymccelib_pdb.md
+            - Structure: developers/pymccelib_structure.md
+        - Geometry library: developers/geometry.md
         - Writing Documentation: developers/mkdocs.md
 
 #theme: readthedocs

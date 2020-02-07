@@ -3,11 +3,17 @@
 import logging
 import os
 import glob
+from geometry import *
 
 ROOMT = 298.15
 PH2KCAL = 1.364
 KCAL2KT = 1.688
 KJ2KCAL = 0.239
+DEFAULT_RAD = 1.5  # for dielectric boundary
+AMINO_ACIDS = ["ALA", "ARG", "ASN", "ASP", "CYS", "CYL", "GLN", "GLY", "GLU", "HIS", "HIL", "ILE", "LEU", "LYS",
+               "MET", "PHE", "PRO", "THR", "TRP", "TYR", "VAL"]
+
+
 
 class Env:
     def __init__(self):
@@ -15,7 +21,9 @@ class Env:
         self.runprm = "run.prm"
         self.version = "PyMCCE 1.0"
         self.fn_conflist1 = "head1.lst"
+        self.fn_step1_out = "step1_out.pdb"
         self.fn_conflist2 = "head2.lst"
+        self.fn_step2_out = "step2_out.pdb"
         self.fn_conflist3 = "head3.lst"
         self.energy_dir = "energies"
         self.ftpldir = ""
@@ -39,6 +47,12 @@ class Env:
         if "EXTRA" in self.prm and os.path.isfile(self.prm["EXTRA"]):
             self.load_ftpl(self.prm["EXTRA"])
 
+        # revise self.atomnames to include empty conformer types
+        for res_conflist in [x for x in self.tpl.keys() if x[0] == "CONFLIST"]:
+            for conf in [x.strip() for x in self.tpl[res_conflist].strip().split(",")]:
+                if conf not in self.atomnames:
+                    self.atomnames[conf] = []
+
         logging.info("Step 0. Done.\n")
         return
 
@@ -48,7 +62,7 @@ class Env:
         path = os.path.abspath(self.runprm)
         logging.info("   Loading run parameter from %s" % path)
         lines = open(self.runprm).readlines()
-        # Sample line: "t        step 1: pre-run, pdb-> mcce pdb                    (DO_PREMCCE)"
+        # Sample line: "t   include     step 1: pre-run, pdb-> mcce pdb                    (DO_PREMCCE)"
         for line in lines:
             line = line.strip()
             line = line.split("#")[0]  # This cuts off everything after #
@@ -158,27 +172,63 @@ class Env:
         os.chdir(cwd)
         return
 
-
 class Atom:
     def __init__(self):
-        self.atomname = ""
+        self.icount = 0
+        self.iconf = 0
+        self.name = ""
         self.confname = ""
         self.resname = ""
         self.on = False
         self.iatom = "0"
+        self.chainid = ""
+        self.seqnum = 0
+        self.icode = "_"
+        self.xyz=()
+        self.resid = ()
+        self.crg = 0.0
+        self.rad = DEFAULT_RAD
+        self.history = "__________"
         return
+
+    def load_nativeline(self, line):
+        self.name = line[12:16]
+        self.resname = line[17:20]
+        self.chainid = line[21]
+        self.seqnum = int(line[22:26])
+        if line[26] != " ":
+            self.icode = line[26]
+        self.xyz = (float(line[30:38]), float(line[38:46]),float(line[46:54]))
+
+        self.resid = (self.resname, self.chainid, self.seqnum, self.icode)
+        return
+
+    def printme(self):
+        line = "ATOM  %5d %4s %3s %c%04d%c%03d%8.3f%8.3f%8.3f%8.3f    %8.3f      %s\n" % (self.icount, self.name,
+                                                                             self.resname,
+                                                                     self.chainid,
+                                                 self.seqnum, self.icode, self.iconf, self.xyz[0],
+                                                 self.xyz[1], self.xyz[2], self.rad, self.crg, self.history)
+
+        return line
 
 class Conformer:
     def __init__(self):
         self.confname = ""
         self.resname = ""
         self.atoms = []
+        self.resid = ()
+        self.history = "__________"
         return
 
 class Residue:
-    def __init__(self):
-        self.resname = []
-        self.conformers = []
+    def __init__(self, resid):
+        self.resid = resid
+        self.resname, self.chainid, self.seqnum, self.icode = resid
+        conf = Conformer()
+        conf.history = "BK________"
+        self.conformers = [conf]
+        self.flag = ""    # flag for ntr, ctr label or other purpose
         return
 
 class Protein:
@@ -188,69 +238,201 @@ class Protein:
         return
 
 
-    def pdb2mcce(self, pdb):
-        """Convert pdb to mcce pdb"""
-        atom_exceptions = [" H2 ", " OXT", " HXT"]
-        mccelines = []
+    def load_nativepdb(self, pdb):
+        """Load native pdb file."""
+
         lines = [x for x in open(pdb).readlines() if x[:6] == "ATOM  " or x[:6] == "HETATM"]
 
-        icount = 0
-        previous_resid = ()
-        possible_confs = []
+        atoms = []
         for line in lines:
             # pdb line
-            atomname = line[12:16]
-            resname = line[17:20]
-            chainid = line[21]
-            seqnum = int(line[22:26])
-            icode = line[26]
-            xyz = line[30:54]
+            atom = Atom()
+            atom.load_nativeline(line)
+            atoms.append(atom)
 
-            if resname == "PRO" and atomname == " H  ":   # Proline H atom exception
+        self.load_atoms_single(atoms)
+
+        return
+
+    def load_atoms_single(self, atoms):
+        resids = []
+        self.residues = []
+        for atom in atoms:
+            try:
+                ires = resids.index(atom.resid)
+            except ValueError:  # new residue
+                self.residues.append(Residue(atom.resid))
+                resids.append(atom.resid)
+                ires = len(self.residues) - 1
+
+            # load atoms into conformer 0
+            self.residues[ires].conformers[0].atoms.append(atom)
+
+        # separate side chain atoms from backbone - BK atoms remain in conformer 0, the rest go to conformer 1
+        for res in self.residues:
+            conflist = [x.strip() for x in env.tpl[("CONFLIST", res.resname)].strip().split(",")]
+            if res.conformers:
+                new_conf0 = []
+                for atom in res.conformers[0].atoms:
+                    # find the first conformer type this atom fits
+                    for conftype in conflist:
+                        if atom.name in env.atomnames[conftype]:
+                            if conftype[-2:] == "BK":  # stays in this conformer, break search conf, next atom
+                                new_conf0.append(atom)
+                            else:
+                                if len(res.conformers) > 1:
+                                    res.conformers[1].atoms.append(atom)
+                                else:
+                                    conf = Conformer()
+                                    conf.history = "%2s________" % (conftype[-2:])  # last two characters
+                                    res.conformers.append(conf)
+                                    res.conformers[1].confname = conftype
+                                    res.conformers[1].resname = res.resname
+                                    res.conformers[1].atoms.append(atom)
+                            break  # do not search other conformers
+                res.conformers[0].atoms = new_conf0
+
+
+        # delete atoms don't belong to conformer 1
+        for res in self.residues:
+            if len(res.conformers) > 1:
+                confname = res.conformers[1].confname
+                valid_atoms = env.atomnames[confname]
+                conf1_atoms = []
+                for atom in res.conformers[1].atoms:
+                    if atom.name in valid_atoms:
+                        conf1_atoms.append(atom)
+                    else:
+                        logging.WARNING("   Deleted atom \"%s\" of %s because it doesn't fit into initial conformer." % (
+                            atom.name, res.resname))
+
+        return
+
+    def pdblines(self):
+        lines = []
+        icount = 1
+        for res in self.residues:
+            conflist = env.tpl[("CONFLIST", res.resname)]
+            #logging.debug(conflist)
+            iconf = 0
+            for conf in res.conformers:
+                for atom in conf.atoms:
+                    atom.icount = icount
+                    atom.iconf = iconf
+                    atom.history = conf.history
+                    line = atom.printme()
+                    lines.append(line)
+                    icount += 1
+                iconf += 1
+        return lines
+
+    def identify_nc(self):
+        # The first and last amino acid in a chain, and no extra bonded atom from other residues in the same chain
+        clash_distance = float(env.prm["CLASH_DISTANCE"])
+        clash_distance2 = clash_distance * clash_distance
+
+        confnames = [x.strip() for x in env.tpl[("CONFLIST", "NTR")].split(",")]
+        NTR_atomnames = set()
+        for conf in confnames:
+            NTR_atomnames = NTR_atomnames | set(env.atomnames[conf])
+
+        confnames = [x.strip() for x in env.tpl[("CONFLIST", "CTR")].split(",")]
+        CTR_atomnames = set()
+        for conf in confnames:
+            CTR_atomnames = CTR_atomnames | set(env.atomnames[conf])
+
+        chains = []
+        # count chains
+        for res in self.residues:
+            if res.chainid not in chains:
+                chains.append(res.chainid)
+
+        for chainid in chains:
+            # get all residues of this chain
+            aminoacids_in_chain = []
+            others_in_chain = []
+            for res in self.residues:
+                if res.chainid == chainid:
+                    if res.resname in AMINO_ACIDS:
+                        aminoacids_in_chain.append(res)
+                    else:
+                        others_in_chain.append(res)
+
+            if aminoacids_in_chain:
+                ntr = aminoacids_in_chain[0]
+                ctr = aminoacids_in_chain[0]
+            else:
                 continue
 
-            current_resid = (resname, chainid, seqnum, icode)
-            # mcce line, need to add conf_number, radius, charge, conf_type, conf_history
-            if current_resid != previous_resid:
-                possible_confs = [x.strip() for x in env.tpl[("CONFLIST", resname)].split(",")]
-                logging.info("Identified a new residue %s: %s" % (resname, ", ".join(possible_confs)))
-                previous_resid = current_resid
-            Found = False
-            for confname in possible_confs:
-                if atomname in env.atomnames[confname]:
-                    conf_type = confname[3:5]
-                    conf_number = possible_confs.index(confname)
-                    cname = confname
-                    Found = True
+            for res in aminoacids_in_chain[1:]:
+                if res.seqnum < ntr.seqnum:
+                    ntr = res.resid[0]
+                elif res.seqnum > ctr.seqnum:
+                    ctr = res
+
+            # verify bond for NTR
+            atom_N =None
+            for atom in ntr.conformers[0].atoms:
+                if atom.name == " N  ":
+                    atom_N = atom
                     break
-            if not Found:
-                # this atom is not found in all conformers
-                if atomname not in atom_exceptions:
-                    print("Atom \"%s\" in pdb file %s can not be assigned to any conformer" % (atomname, pdb))
-                continue
 
-            key = ("RADIUS", cname, atomname)
-            if key in env.tpl:
-                radius_str = env.tpl[key]
-                rad, _, _ = radius_str.split(",")
-                rad = float(rad)
-            else:
-                rad = 0.0
+            if not atom_N:
+                logging.critical("No N atom found for NTR residue")
+                return False
 
-            key = ("CHARGE", cname, atomname)
-            if key in env.tpl:
-                charge_str = env.tpl[key]
-                crg = float(charge_str)
-            else:
-                crg = 0.0
+            ntr.flag = "ntr"
+            for res in others_in_chain:
+                if not ntr.flag:
+                    break
+                for conf in res.conformers:
+                    if not ntr.flag:
+                        break
+                    for atom2 in conf.atoms:
+                        d2 = d2vv(atom2.xyz, atom_N.xyz)
+                        if d2 < clash_distance2:
+                            ntr.flag = ""
+                            break
 
-            conf_history = "________"
-            newline = "ATOM  %5d %4s %s %c%4d%c%03d%s%8.3f    %8.3f      %s%s\n" % \
-                      (icount, atomname, resname, chainid, seqnum, icode, conf_number, xyz, rad, crg, conf_type, conf_history)
-            mccelines.append(newline)
-            icount += 1
+            # verify bond for CTR
+            atom_C =None
+            for atom in ntr.conformers[0].atoms:
+                if atom.name == " C  ":
+                    atom_C = atom
+                    break
 
-        return mccelines
+            if not atom_C:
+                logging.critical("No C atom found for CTR residue")
+                return False
+
+            ctr.flag = "ctr"
+            for res in others_in_chain:
+                if not ctr.flag:
+                    break
+                for conf in res.conformers:
+                    if not ctr.flag:
+                        break
+                    for atom2 in conf.atoms:
+                        d2 = d2vv(atom2.xyz, atom_C.xyz)
+                        if d2 < clash_distance2:
+                            ctr.flag = ""
+                            break
+
+        new_atoms = []
+        for res in self.residues:
+            for conf in res.conformers:
+                for atom in conf.atoms:
+                    if res.flag == "ntr" and atom.name in NTR_atomnames:
+                        atom.resname = "NTR"
+                        atom.resid = ("NTR", res.resid[1], res.resid[2], res.resid[3])
+                    elif res.flag == "ctr" and atom.name in CTR_atomnames:
+                        atom.resname = "CTR"
+                        atom.resid = ("CTR", res.resid[1], res.resid[2], res.resid[3])
+                    new_atoms.append(atom)
+
+        self.load_atoms_single(new_atoms)
+
+        return True
 
 
 env = Env()

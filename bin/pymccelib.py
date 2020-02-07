@@ -62,7 +62,7 @@ class Env:
         path = os.path.abspath(self.runprm)
         logging.info("   Loading run parameter from %s" % path)
         lines = open(self.runprm).readlines()
-        # Sample line: "t        step 1: pre-run, pdb-> mcce pdb                    (DO_PREMCCE)"
+        # Sample line: "t   include     step 1: pre-run, pdb-> mcce pdb                    (DO_PREMCCE)"
         for line in lines:
             line = line.strip()
             line = line.split("#")[0]  # This cuts off everything after #
@@ -225,7 +225,9 @@ class Residue:
     def __init__(self, resid):
         self.resid = resid
         self.resname, self.chainid, self.seqnum, self.icode = resid
-        self.conformers = []
+        conf = Conformer()
+        conf.history = "BK________"
+        self.conformers = [conf]
         self.flag = ""    # flag for ntr, ctr label or other purpose
         return
 
@@ -241,22 +243,27 @@ class Protein:
 
         lines = [x for x in open(pdb).readlines() if x[:6] == "ATOM  " or x[:6] == "HETATM"]
 
-        resids = []
+        atoms = []
         for line in lines:
             # pdb line
             atom = Atom()
             atom.load_nativeline(line)
+            atoms.append(atom)
 
-            # mcce line, need to add conf_number, radius, charge, conf_type, conf_history
+        self.load_atoms_single(atoms)
+
+        return
+
+    def load_atoms_single(self, atoms):
+        resids = []
+        self.residues = []
+        for atom in atoms:
             try:
                 ires = resids.index(atom.resid)
             except ValueError:  # new residue
                 self.residues.append(Residue(atom.resid))
                 resids.append(atom.resid)
                 ires = len(self.residues) - 1
-                conf = Conformer()
-                conf.history  = "BK________"
-                self.residues[ires].conformers=[conf]   # set up conformer 0
 
             # load atoms into conformer 0
             self.residues[ires].conformers[0].atoms.append(atom)
@@ -265,35 +272,39 @@ class Protein:
         for res in self.residues:
             conflist = [x.strip() for x in env.tpl[("CONFLIST", res.resname)].strip().split(",")]
             if res.conformers:
+                new_conf0 = []
                 for atom in res.conformers[0].atoms:
                     # find the first conformer type this atom fits
                     for conftype in conflist:
                         if atom.name in env.atomnames[conftype]:
                             if conftype[-2:] == "BK":  # stays in this conformer, break search conf, next atom
-                                break
+                                new_conf0.append(atom)
                             else:
                                 if len(res.conformers) > 1:
                                     res.conformers[1].atoms.append(atom)
                                 else:
                                     conf = Conformer()
-                                    conf.history="%2s________" % (conftype[-2:])  # last two characters
+                                    conf.history = "%2s________" % (conftype[-2:])  # last two characters
                                     res.conformers.append(conf)
                                     res.conformers[1].confname = conftype
                                     res.conformers[1].resname = res.resname
                                     res.conformers[1].atoms.append(atom)
-                                res.conformers[0].atoms.remove(atom)
-                                break  # do not search other conformers
+                            break  # do not search other conformers
+                res.conformers[0].atoms = new_conf0
+
 
         # delete atoms don't belong to conformer 1
         for res in self.residues:
             if len(res.conformers) > 1:
                 confname = res.conformers[1].confname
                 valid_atoms = env.atomnames[confname]
+                conf1_atoms = []
                 for atom in res.conformers[1].atoms:
-                    if atom.name not in valid_atoms:
+                    if atom.name in valid_atoms:
+                        conf1_atoms.append(atom)
+                    else:
                         logging.WARNING("   Deleted atom \"%s\" of %s because it doesn't fit into initial conformer." % (
                             atom.name, res.resname))
-                        res.conformers[1].atoms.remove(atom)
 
         return
 
@@ -320,6 +331,16 @@ class Protein:
         clash_distance = float(env.prm["CLASH_DISTANCE"])
         clash_distance2 = clash_distance * clash_distance
 
+        confnames = [x.strip() for x in env.tpl[("CONFLIST", "NTR")].split(",")]
+        NTR_atomnames = set()
+        for conf in confnames:
+            NTR_atomnames = NTR_atomnames | set(env.atomnames[conf])
+
+        confnames = [x.strip() for x in env.tpl[("CONFLIST", "CTR")].split(",")]
+        CTR_atomnames = set()
+        for conf in confnames:
+            CTR_atomnames = CTR_atomnames | set(env.atomnames[conf])
+
         chains = []
         # count chains
         for res in self.residues:
@@ -336,6 +357,7 @@ class Protein:
                         aminoacids_in_chain.append(res)
                     else:
                         others_in_chain.append(res)
+
             if aminoacids_in_chain:
                 ntr = aminoacids_in_chain[0]
                 ctr = aminoacids_in_chain[0]
@@ -344,12 +366,12 @@ class Protein:
 
             for res in aminoacids_in_chain[1:]:
                 if res.seqnum < ntr.seqnum:
-                    ntr = res
+                    ntr = res.resid[0]
                 elif res.seqnum > ctr.seqnum:
                     ctr = res
 
             # verify bond for NTR
-            atom_N =""
+            atom_N =None
             for atom in ntr.conformers[0].atoms:
                 if atom.name == " N  ":
                     atom_N = atom
@@ -373,7 +395,7 @@ class Protein:
                             break
 
             # verify bond for CTR
-            atom_C =""
+            atom_C =None
             for atom in ntr.conformers[0].atoms:
                 if atom.name == " C  ":
                     atom_C = atom
@@ -396,10 +418,19 @@ class Protein:
                             ctr.flag = ""
                             break
 
-
+        new_atoms = []
         for res in self.residues:
-            if res.flag:
-                print("%s, %s" % (res.flag, res.resid))
+            for conf in res.conformers:
+                for atom in conf.atoms:
+                    if res.flag == "ntr" and atom.name in NTR_atomnames:
+                        atom.resname = "NTR"
+                        atom.resid = ("NTR", res.resid[1], res.resid[2], res.resid[3])
+                    elif res.flag == "ctr" and atom.name in CTR_atomnames:
+                        atom.resname = "CTR"
+                        atom.resid = ("CTR", res.resid[1], res.resid[2], res.resid[3])
+                    new_atoms.append(atom)
+
+        self.load_atoms_single(new_atoms)
 
         return True
 

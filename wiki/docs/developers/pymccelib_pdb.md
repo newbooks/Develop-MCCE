@@ -125,6 +125,7 @@ Rotamer making mechanism code explained, for column 7:
 
 ---
 ### Read a native pdb file
+
 Protein.load_nativepdb(pdb)
 
 *Load native pdb file into Protein data structure.*

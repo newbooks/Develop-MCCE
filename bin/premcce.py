@@ -16,6 +16,7 @@ if __name__ == "__main__":
         prot.identify_nc()
 
     # remove exposed water
+        prot.remove_exposed()
 
     # Disulfide bridge
 

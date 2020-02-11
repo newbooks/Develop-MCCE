@@ -435,4 +435,14 @@ class Protein:
         return True
 
 
+    def remove_exposed(self):
+
+
+        return
+
+    def sas(self):
+
+
+        return
+
 env = Env()

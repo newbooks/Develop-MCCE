@@ -1,5 +1,5 @@
 # Values of the same key are appended and separated by ","
-CONFLIST, _ZN: _ZNBK, _ZN+2, _ZNDM
+CONFLIST, " ZN": _ZNBK, _ZN+2, _ZNDM
 
 # Atom definition
 CONNECT, "ZN  ", _ZN+2: ?
